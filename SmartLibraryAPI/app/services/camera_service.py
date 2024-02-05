@@ -67,6 +67,8 @@ class CameraService:
             face_locations = face_recognition.face_locations(rgb_frame)
 
             #frame = rgb_frame
+
+            # 臉部記數
             face_num = 0
             username = ""
             for face_location in face_locations:

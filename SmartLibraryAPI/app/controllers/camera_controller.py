@@ -6,16 +6,9 @@ from ..services.camera_service import CameraService
 # 建立 Namespace
 camera_namespace = Namespace('camera', description='Camera related operations')
 
-# 資料模型
-camera_model = camera_namespace.model('Author', {
-    'img_path': fields.String(readonly=True, description='image path')
-    # 傳入的img應該為圖片路徑
-})
-
 @camera_namespace.route('/')
 class CameraResource(Resource):
     # 針對單一畫面進行臉部識別
-    @camera_namespace.expect(camera_model)
     def face_recognition(self):
         """Recognize face"""
         try:
