@@ -13,6 +13,7 @@ class CameraService:
         self.face_embeddings = []
         self.database = {}
         self.update_embeddings()
+        self.frame = cv2.imread("SmartLibraryAPI\app\content\temp\login_temp.png")
 
     # embeddings更新資料
     def update_embeddings(self):
@@ -56,8 +57,9 @@ class CameraService:
             raise e
 
     # 捕捉其中一幀 檢測臉部並保存嵌入
-    def recogintion_face(self, frame):
+    def recogintion_face(self):
         try:
+            frame = self.frame
             # 將幀轉換為 RGB 格式（face_recognition 使用 RGB）
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 

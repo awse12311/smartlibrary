@@ -19,8 +19,7 @@ class CameraResource(Resource):
     def face_recognition(self):
         """Recognize face"""
         try:
-            data = request.get_json()
-            result, img = CameraService.recogintion_face(frame=data)
+            result, img = CameraService.recogintion_face()
             # result: 判定結果(臉部數量超過回傳-1 沒有搜尋到匹配者回傳0 搜尋到匹配者回傳ID)
             if result == 1 or type(result) == str:
                 return {"result":result, "img":img}, 201
