@@ -20,7 +20,7 @@ def create_app():
 
     # 初始化 Flask-Migrate
     migrate = Migrate(app, db)
-    migrate.init_app()
+    # migrate.init_app(app)
     db.init_app(app)
 
     api = Api(app, version='1.0', title='Smart Library API', description='Smart Library API Documentation')
