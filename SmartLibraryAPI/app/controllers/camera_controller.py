@@ -1,86 +1,34 @@
 from flask import request
 from flask_restx import Namespace, Resource, fields
 from flask import jsonify
-from ..services.authors_service import AuthorService
+from ..services.camera_service import CameraService
 
 # 建立 Namespace
-authors_namespace = Namespace('authors', description='Authors related operations')
+camera_namespace = Namespace('camera', description='Camera related operations')
 
 # 資料模型
-author_model = authors_namespace.model('Author', {
-    'id': fields.Integer(readonly=True, description='Author ID'),
-    'book_id': fields.Integer(description='Book ID'),
-    'author_name': fields.String(required=True, description='Author name'),
-    'created_at': fields.String(description='Created at timestamp'),
-    'updated_at': fields.String(description='Updated at timestamp'),
-    # 如果有其他字段，可以继续添加
+camera_model = camera_namespace.model('Author', {
+    'img_path': fields.String(readonly=True, description='image path')
+    # 傳入的img應該為圖片路徑
 })
 
-@authors_namespace.route('/')
-class AuthorsResource(Resource):
-    @authors_namespace.expect(author_model)
-    def post(self):
-        """Create a new author"""
+@camera_namespace.route('/')
+class CameraResource(Resource):
+    # 針對單一畫面進行臉部識別
+    @camera_namespace.expect(camera_model)
+    def face_recognition(self):
+        """Recognize face"""
         try:
             data = request.get_json()
-            author = AuthorService.create_author(data)
-            return (author.serialize()), 201
+            result, img = CameraService.recogintion_face(frame=data)
+            # result: 判定結果(臉部數量超過回傳-1 沒有搜尋到匹配者回傳0 搜尋到匹配者回傳ID)
+            if result == 1 or type(result) == str:
+                return {"result":result, "img":img}, 201
+            else:
+                return {"result":result}, 201
         except Exception as e:
             return ({'error': str(e)}), 500
 
-    def get(self):
-        """Get all authors"""
-        try:
-            authors = AuthorService.get_all_authors()
-            return ([author.serialize() for author in authors]), 200
-        except Exception as e:
-            return ({'error': str(e)}), 500
-
-@authors_namespace.route('/<int:author_id>')
-class AuthorResource(Resource):
-    def get(self, author_id):
-        """Get author by ID"""
-        try:
-            author = AuthorService.get_author_by_id(author_id)
-            if author is None:
-                return ({'error': 'Author not found'}), 404
-            return (author.serialize()), 200
-        except Exception as e:
-            return ({'error': str(e)}), 500
-
-    @authors_namespace.expect(author_model)
-    def put(self, author_id):
-        """Update an author"""
-        try:
-            data = request.get_json()
-            author = AuthorService.update_author(author_id, data)
-            if author is None:
-                return ({'error': 'Author not found'}), 404
-            return (author.serialize()), 200
-        except Exception as e:
-            return ({'error': str(e)}), 500
-
-    def delete(self, author_id):
-        """Delete an author"""
-        try:
-            success = AuthorService.delete_author(author_id)
-            if not success:
-                return ({'error': 'Author not found'}), 404
-            return ({'result': 'Author deleted'}), 200
-        except Exception as e:
-            return ({'error': str(e)}), 500
-
-@authors_namespace.route('/batch')
-class BatchAuthorsResource(Resource):
-    @authors_namespace.expect([author_model])
-    def post(self):
-        """Create batch authors"""
-        try:
-            batch_data = request.json
-            new_authors = AuthorService.create_batch_authors(batch_data)
-            return ([author.serialize() for author in new_authors]), 201
-        except Exception as e:
-            return ({'error': str(e)}), 500
 
 
 
