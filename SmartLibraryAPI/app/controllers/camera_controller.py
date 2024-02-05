@@ -12,12 +12,13 @@ class CameraResource(Resource):
     def face_recognition(self):
         """Recognize face"""
         try:
-            result, img = CameraService.recogintion_face()
-            # result: 判定結果(臉部數量超過回傳-1 沒有搜尋到匹配者回傳0 搜尋到匹配者回傳ID)
-            if result == 1 or type(result) == str:
-                return {"result":result, "img":img}, 201
-            else:
-                return {"result":result}, 201
+            result = CameraService.recogintion_face()
+            # result: 判定結果:
+            # 沒有偵測到臉: "no_face" 
+            # 臉部數量超過: "over_face" 
+            # 找到臉但沒有搜尋到匹配者: "no_register" 
+            # 搜尋到匹配者: user_id(類型為int))
+            return result , 201
         except Exception as e:
             return ({'error': str(e)}), 500
 

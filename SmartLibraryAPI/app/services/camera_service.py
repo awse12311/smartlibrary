@@ -11,18 +11,22 @@ class CameraService:
     def __init__(self):
         self.face_rec_model = face_recognition.api.face_encodings
         self.face_embeddings = []
-        self.database = {}
+        self.database = []
         self.update_embeddings()
-        self.frame = cv2.imread("SmartLibraryAPI\app\content\temp\login_temp.png")
+        self.frame = cv2.imread("SmartLibraryAPI/app/content/temp/login_temp.png")
 
     # embeddings更新資料
     def update_embeddings(self):
         try:
-            self.database = UserService.get_all_users()
+            origin_data = UserService.get_all_users()
+            self.database = []
             self.face_embeddings = []
-            for name in self.database["username"]:
-                print("載入資料: " + name)
-                self.face_embeddings.append(np.load("database/" + name + ".npy"))
+            for name in origin_data:
+                username = name["username"]
+                user_id = name["user_id"]
+                print("載入資料: " + user_id)
+                self.database.append({"username":username, "user_id":user_id})
+                self.face_embeddings.append(np.load("SmartLibraryAPI/app/content/source/npy/" + user_id + ".npy"))
         except Exception as e:
             raise e
 
@@ -46,12 +50,17 @@ class CameraService:
     def find_most_similar(self, target_embedding):
         try:
             # 求餘弦相似度
+            # 照順序對self.face_embeddings的list中所有資料做cosine_similarity 並存成一個新的list
             similarities = [self.cosine_similarity(target_embedding, embedding) for embedding in self.face_embeddings]
+            # 用np.argmax找出新list中最大的位置(最相似)
             most_similar_index = np.argmax(similarities)
+            # 將新list中最大位置的值拿出來
             most_similar_similarity = similarities[most_similar_index]
             print(similarities)
+            # 如果最大值小於0.98 則代表沒有匹配成功 回傳-1
             if most_similar_similarity < 0.98: # 相似值超過98%則匹配成功
                 return -1, 0
+            # 若匹配成功 回傳位置和值
             return most_similar_index, most_similar_similarity
         except Exception as e:
             raise e
@@ -70,7 +79,6 @@ class CameraService:
 
             # 臉部記數
             face_num = 0
-            username = ""
             for face_location in face_locations:
                 face_num += 1
                 # 提取臉部位置座標（top, right, bottom, left）
@@ -83,20 +91,23 @@ class CameraService:
                 # 若找到臉 則和資料庫中的配對
                 if face_embedding is not None:
                     self.update_embeddings()
-                    target = face_embedding 
+                    target = face_embedding
+                    # score為最高相似度
                     id, score = self.find_most_similar(target)
                     if id == -1:
-                        username = "無註冊資料"
+                        user_id = -1
                     else:
-                        username = self.database["username"][id]
+                        user_id = self.database[id]["user_id"]
             if face_num == 0: # 沒有找到臉
-                return 0, 0
+                return "no_face"
             elif face_num > 1: # 超過一個臉
-                return -1, 0
-            elif username == "無註冊資料": # 找到臉但沒有匹配者
-                return 1, face_image
+                return "over_face"
+            elif user_id == -1: # 找到臉但沒有匹配者
+                cv2.imwrite("SmartLibraryAPI/app/content/temp/login_temp.jpg", face_image)
+                return "no_register"
             else: # 找到臉且已匹配
-                return username, face_image
+                cv2.imwrite("SmartLibraryAPI/app/content/temp/login_temp.jpg", face_image)
+                return user_id
         except Exception as e:
             raise e
 
