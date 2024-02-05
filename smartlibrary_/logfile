@@ -1,0 +1,2 @@
+2024-01-31 10:57:36.763 CST [9512] FATAL:  lock file "postmaster.pid" already exists
+2024-01-31 10:57:36.763 CST [9512] HINT:  Is another postmaster (PID 6196) running in data directory "C:/Users/User/Documents/Dev/smartlibrary_20240131/data"?
