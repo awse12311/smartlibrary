@@ -43,6 +43,6 @@ def create_app():
     return app
 def start_pg_ctl():
     # 在這裡執行啟動 pg_ctl 的指令
-    subprocess.run(['pg_ctl', 'restart', '-D', 'D:\\Dev\\smartlibrary_20240131\\SmartLibraryAPI\\app\\data'])
+    subprocess.run(['pg_ctl', 'restart', '-D', 'C:\Users\User\Documents\GitHub\smartlibraryAPI\smartlibrary_\SmartLibraryAPI\app\data'])
 if __name__ == '__main__':
     create_app().run(debug=True)
