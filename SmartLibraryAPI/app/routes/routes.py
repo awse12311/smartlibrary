@@ -4,10 +4,11 @@
 from flask_restx import Api
 from ..controllers.books_controller import  books_namespace
 from ..controllers.questionnaire_book_interest_controller import  questionnaire_books_interest_namespace
-from ..controllers.users_controller import UserResource,UserDetailResource,BatchUserResource, users_namespace
-from ..controllers.authors_controller import AuthorsResource, authors_namespace
-from ..controllers.ratings_controller import RatingResource,RatingDetailResource,BatchRatingResource, ratings_namespace
-from ..controllers.questionnaire_users_interest_controller import QuestionnaireUsersInterestResource,QuestionnaireUsersInterestDetailResource, qn_users_interests_namespace
+from ..controllers.users_controller import  users_namespace
+from ..controllers.authors_controller import  authors_namespace
+from ..controllers.ratings_controller import  ratings_namespace
+from ..controllers.questionnaire_users_interest_controller import  qn_users_interests_namespace
+from ..controllers.camera_controller import  camera_namespace
 
 class register_route:
     def register_books_routes(self,api):
@@ -27,7 +28,8 @@ class register_route:
 
     def register_questionnaire_users_interest_routes(self,api):
         api.add_namespace(qn_users_interests_namespace, path='/api/questionnaire_users_interests')
-
+    def register_questionnaire_users_interest_routes(self,api):
+        api.add_namespace(camera_namespace, path='/api/camera')
 
 
 

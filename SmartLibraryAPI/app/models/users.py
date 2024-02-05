@@ -10,6 +10,7 @@ class User(db.Model):
     password = Column(String(255), nullable=False)
     email = Column(String(255), unique=True, nullable=False)
     face_recognition_image_path = Column(String(500))
+    face_recognition_npy_path = Column(String(500))
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.current_timestamp())
     updated_at = Column(TIMESTAMP(timezone=True), server_default=func.current_timestamp(), server_onupdate=func.current_timestamp())
 
@@ -20,6 +21,7 @@ class User(db.Model):
             'password': self.password,
             'email': self.email,
             'face_recognition_image_path': self.face_recognition_image_path,
+            'face_recognition_npy_path': self.face_recognition_npy_path,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             'updated_at': self.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
         }
