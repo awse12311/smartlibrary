@@ -1,8 +1,12 @@
 # models/authors.py
 
-from ..extensions import db,Column,Integer,ForeignKey,String,TIMESTAMP,func
-
-
+from ..extensions import db
+Column = db.Column
+Integer = db.Integer
+String = db.String
+TIMESTAMP = db.TIMESTAMP
+func =db.func
+ForeignKey = db.ForeignKey
 class Author(db.Model):
     __tablename__ = 'authors'
 

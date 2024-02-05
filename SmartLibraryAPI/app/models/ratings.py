@@ -1,5 +1,10 @@
-from ..extensions import db,Column,Integer,ForeignKey,TIMESTAMP,func
-
+from ..extensions import db
+Column = db.Column
+Integer = db.Integer
+String = db.String
+TIMESTAMP = db.TIMESTAMP
+func =db.func
+ForeignKey = db.ForeignKey
 class Rating(db.Model):
     __tablename__ = 'ratings'
 

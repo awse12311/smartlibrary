@@ -1,6 +1,10 @@
 #models/users.py
-from ..extensions import db,Column,Integer,String,TIMESTAMP,func
-
+from ..extensions import db
+Column = db.Column
+Integer = db.Integer
+String = db.String
+TIMESTAMP = db.TIMESTAMP
+func =db.func
 
 class User(db.Model):
     __tablename__ = 'users'

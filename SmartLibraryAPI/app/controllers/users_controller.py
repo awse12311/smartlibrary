@@ -14,6 +14,7 @@ user_model = users_namespace.model('User', {
     'password': fields.String(required=True, description='Password'),
     'email': fields.String(required=True, description='Email'),
     'face_recognition_image_path': fields.String(description='Face recognition image path'),
+    'face_recognition_nyp_path': fields.String(description='Face recognition npy path'),
     'created_at': fields.String(description='Created at timestamp'),
     'updated_at': fields.String(description='Updated at timestamp'),
 })
