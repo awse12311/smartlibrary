@@ -1,0 +1,102 @@
+/* 整体页面样式 */
+body {
+    font-family: Arial, sans-serif; /* 使用 Arial 字体 */
+    margin: 0; /* 移除页面默认边距 */
+    display: flex; /* 使用 Flex 布局 */
+    flex-direction: column; /* 纵向排列子元素 */
+    align-items: center; /* 水平居中 */
+    justify-content: center; /* 垂直居中 */
+    height: 100vh; /* 设置高度为视口高度的百分比 */
+    background: url("../images/bookshelf-413705_1280.jpg") center center/cover no-repeat; /* 背景图片设置 */
+}
+
+/* 页眉样式 */
+header {
+    text-align: center; /* 文字居中 */
+    padding: 20px; /* 页眉内边距 */
+    color: white; /* 文字颜色 */
+    position: absolute; /* 绝对定位 */
+    top: 10px; /* 与顶部的距离 */
+    left: 10px; /* 与左侧的距离 */
+    background: rgb(0, 0, 0); /* 背景颜色 */
+}
+
+/* 主容器样式 */
+.container {
+    display: flex; /* 使用 Flex 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+/* 注册容器和相机容器样式 */
+.register-container, .camera-container {
+    border: 1px solid #ccc; /* 边框样式 */
+    padding: 20px; /* 内边距 */
+    background: rgba(255, 255, 255, 0.8); /* 背景透明度设置为 0.8 */
+    text-align: center; /* 文字居中 */
+}
+
+/* 相机容器样式，使其宽度自适应 */
+.camera-container {
+    flex: 1; /* 占据剩余空间 */
+    max-width: 320px; /* 设置最大宽度 */
+    margin: 10px; /* 外边距 */
+}
+
+video {
+    margin-bottom: 10px; /* 底部外边距 */
+    width: 100%; /* 宽度占满父容器 */
+}
+
+button {
+    padding: 10px; /* 内边距 */
+    margin-top: 10px; /* 顶部外边距 */
+    cursor: pointer; /* 鼠标指针样式 */
+}
+
+/* 照片样式 */
+#photo {
+    max-width: 100%; /* 最大宽度100% */
+    height: 240px; /* 高度固定为240px */
+    margin-top: 10px; /* 顶部外边距 */
+    object-fit: cover; /* 图片保持比例覆盖整个区域 */
+}
+
+/* 相机样式 */
+#camera {
+    width: 100%; /* 宽度占满父容器 */
+    height: auto; /* 高度自适应 */
+    object-fit: cover; /* 图片保持比例覆盖整个区域 */
+}
+
+/* 调整注册表单和拍照区块之间的距离 */
+.register-container, .camera-container {
+    margin: 10px; /* 调整 margin 的值来控制距离 */
+}
+
+/* 调整注册表单的样式 */
+.register-container form {
+    display: inline-block; /* 行内块级元素 */
+    text-align: left; /* 左对齐文本 */
+}
+
+.register-container label {
+    display: block; /* 块级元素 */
+    margin-bottom: 5px; /* 底部外边距 */
+}
+
+/* 复选框容器样式 */
+.checkbox-container {
+    display: flex; /* 使用 Flex 布局 */
+    flex-wrap: wrap; /* 换行 */
+    background-color: rgba(194, 184, 184, 0.8); /* 背景颜色透明度设置为 0.8 */
+    padding: 10px; /* 内边距 */
+    border-radius: 10px; /* 圆角边框 */
+}
+
+/* 复选框样式 */
+.form-check {
+    flex: 0 0 calc(33.333% - 10px); /* 设置宽度，考虑到 margin */
+    margin-right: 10px; /* 右外边距 */
+    margin-bottom: 10px; /* 底部外边距 */
+}

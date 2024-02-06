@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>還書系統</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recommend-styles.css') }}">
+</head>
+<body>
+    <div id="header">
+        <h1>還書系統</h1>
+    </div>
+
+    <div id="main-container">
+        <div id="return-registration">
+            <h2>還書登記</h2>
+            <p>請掃描標籤以完成登記</p>
+
+            <!-- 左側表格 - 已登記書籍 -->
+            <div class="table-container">
+                <h3>已登記書籍</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>書名</th>
+                            <th>分類</th>
+                            <th>是否逾期</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Book 1 Title</td>
+                            <td>Fiction</td>
+                            <td>是</td>
+                        </tr>
+                        <tr>
+                            <td>Book 2 Title</td>
+                            <td>Mystery</td>
+                            <td>否</td>
+                        </tr>
+                        <!-- 添加更多書籍行 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 右側表格 - 以借閱書籍 -->
+            <div class="table-container">
+                <h3>以借閱書籍</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>書名</th>
+                            <th>分類</th>
+                            <th>借閱期限</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Book 3 Title</td>
+                            <td>Science Fiction</td>
+                            <td>2024-03-15</td>
+                        </tr>
+                        <tr>
+                            <td>Book 4 Title</td>
+                            <td>Thriller</td>
+                            <td>2024-03-20</td>
+                        </tr>
+                        <!-- 添加更多書籍行 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 還書登記和返回按鈕 -->
+            <div id="action-buttons">
+                <button class="btn btn-primary">還書登記</button>
+                <a class="back-to-user-interface" href="{{ url_for('routes.user') }}">返回使用者介面</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖書館登入系統</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <h1>圖書館登入系統</h1>
+	</div>
+	
+     <div id="faceRecognitionArea">
+        <h2>人臉識別</h2>
+        <canvas id="faceCanvas" width="320" height="240"></canvas>
+    </div>
+
+    <div id="login-form">
+        <label for="username">帳號：</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="password">密碼：</label>
+        <input type="password" id="password" name="password" required>
+        
+        <button onclick="login()">登入</button>
+        <button onclick="window.location.href='/register'">新會員註冊</button>
+    </div>
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

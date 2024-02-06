@@ -1,0 +1,77 @@
+/* 整体页面样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: url("../images/bookshelf-413705_1280.jpg") center center/cover no-repeat;
+    background-size: cover;
+}
+
+/* 页眉样式 */
+#header {
+    text-align: center;
+    padding: 20px;
+    color: white;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgb(0, 0, 0);
+}
+
+/* 主容器样式 */
+#main-container {
+    max-width: 800px;
+    margin: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 歡迎信息样式 */
+#welcome-message {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* 書籍樣式 */
+.book {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.book img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+/* 每本書佔據50%寬度 */
+.book-info {
+    flex: 1;
+    width: 50%;
+}
+
+.book-info h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.book-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* 操作按鈕樣式 */
+
+
+button {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
