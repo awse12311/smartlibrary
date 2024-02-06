@@ -12,7 +12,7 @@ class CameraResource(Resource):
     def face_recognition(self):
         """Recognize face"""
         try:
-            result = CameraService.recogintion_face()
+            result = CameraService.recogintion_face_for_image()
             # result: 判定結果:
             # 沒有偵測到臉: "no_face" 
             # 臉部數量超過: "over_face" 

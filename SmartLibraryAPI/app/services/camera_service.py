@@ -65,8 +65,22 @@ class CameraService:
         except Exception as e:
             raise e
 
+    # 傳入一個圖片 回傳是否有人臉在裡面
+    def recogintion_face(self, frame):
+        try:
+            # 將幀轉換為 RGB 格式（face_recognition 使用 RGB）
+            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+            # 使用 face_recognition 獲取臉部位置
+            face_locations = face_recognition.face_locations(rgb_frame)
+            for face_location in face_locations:
+                return True
+            return False
+        except Exception as e:
+            raise e
+
     # 捕捉其中一幀 檢測臉部並保存嵌入
-    def recogintion_face(self):
+    def recogintion_face_for_image(self):
         try:
             frame = self.frame
             # 將幀轉換為 RGB 格式（face_recognition 使用 RGB）
@@ -79,13 +93,21 @@ class CameraService:
 
             # 臉部記數
             face_num = 0
+            user_id = -1
             for face_location in face_locations:
                 face_num += 1
                 # 提取臉部位置座標（top, right, bottom, left）
                 top, right, bottom, left = face_location
 
-                # 從幀中裁剪臉部區域
-                face_image = frame[top:bottom, left:right]
+                EXTRA_CUT = 30
+                # 將裁剪區域擴大
+                expanded_top = max(0, top - EXTRA_CUT)
+                expanded_right = min(frame.shape[1], right + EXTRA_CUT)
+                expanded_bottom = min(frame.shape[0], bottom + EXTRA_CUT)
+                expanded_left = max(0, left - EXTRA_CUT)
+
+                # 從幀中裁剪擴大後的臉部區域
+                face_image = frame[expanded_top:expanded_bottom, expanded_left:expanded_right]
                 face_embedding = self.get_face_embedding(face_image)
 
                 # 若找到臉 則和資料庫中的配對
@@ -104,10 +126,26 @@ class CameraService:
                 return "over_face"
             elif user_id == -1: # 找到臉但沒有匹配者
                 cv2.imwrite("SmartLibraryAPI/app/content/temp/login_temp.jpg", face_image)
+                np.save("SmartLibraryAPI/app/content/temp/login_temp.npy", face_embedding)
                 return "no_register"
             else: # 找到臉且已匹配
                 cv2.imwrite("SmartLibraryAPI/app/content/temp/login_temp.jpg", face_image)
+                np.save("SmartLibraryAPI/app/content/temp/login_temp.npy", face_embedding)
                 return user_id
+        except Exception as e:
+            raise e
+
+    def recogintion_face_with_cascade(self, frame):
+        try:
+            face_cascade = cv2.CascadeClassifier("SmartLibraryAPI/app/content/temp/haarcascade_frontalface_default.xml")
+            # 將幀轉換為 RGB 格式（face_recognition 使用 RGB）
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+            # 使用 face_recognition 獲取臉部位置
+            face_locations = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=3, minSize=(150, 150))
+            for (x, y, w, h) in face_locations:
+                return True
+            return False
         except Exception as e:
             raise e
 
