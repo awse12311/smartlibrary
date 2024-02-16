@@ -55,5 +55,4 @@ class FetchService:
             except requests.exceptions.RequestException as e:
                 print("Error fetching JSON data:", e)
                 return None
-
     # 後續根據需求自行增加

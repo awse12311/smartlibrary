@@ -18,7 +18,7 @@ class CameraService:
     # embeddings更新資料
     def update_embeddings(self):
         try:
-            origin_data = FetchService.get_all_users()
+            origin_data = FetchService().get_all_users()
             self.database = []
             self.face_embeddings = []
             for name in origin_data:
