@@ -51,10 +51,8 @@ body {
     margin-right: 10px;
 }
 
-/* 每本書佔據50%寬度 */
 .book-info {
     flex: 1;
-    width: 50%;
 }
 
 .book-info h3 {
@@ -68,10 +66,28 @@ body {
 }
 
 /* 操作按鈕樣式 */
-
+#action-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
 
 button {
     padding: 10px 20px;
     font-size: 14px;
     cursor: pointer;
+}
+
+button.borrow {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+button.return {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+button.logout {
+    background-color: #f44336;
+    color: #fff;
 }

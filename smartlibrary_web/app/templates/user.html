@@ -17,7 +17,6 @@
             歡迎使用者ID: <span id="user-id">YourUserID</span>
         </div>
 
-        <!-- 第一本書 -->
         <div class="book">
             <img src="book1.jpg" alt="Book 1 Cover">
             <div class="book-info">
@@ -25,6 +24,9 @@
                 <p>分類: Fiction</p>
                 <p>評分: 4.5</p>
             </div>
+        </div>
+
+        <div class="book">
             <img src="book2.jpg" alt="Book 2 Cover">
             <div class="book-info">
                 <h3>Book 2 Title</h3>
@@ -33,42 +35,12 @@
             </div>
         </div>
 
-        <!-- 第三本書 -->
-        <div class="book">
-            <img src="book3.jpg" alt="Book 3 Cover">
-            <div class="book-info">
-                <h3>Book 3 Title</h3>
-                <p>分類: Science Fiction</p>
-                <p>評分: 4.2</p>
-            </div>
-            <img src="book4.jpg" alt="Book 4 Cover">
-            <div class="book-info">
-                <h3>Book 4 Title</h3>
-                <p>分類: Thriller</p>
-                <p>評分: 4.8</p>
-            </div>
-        </div>
-        <!-- 第五本書 -->
-        <div class="book">
-            <img src="book5.jpg" alt="Book 5 Cover">
-            <div class="book-info">
-                <h3>Book 5 Title</h3>
-                <p>分類: Fantasy</p>
-                <p>評分: 4.3</p>
-            </div>
-            <img src="book6.jpg" alt="Book 6 Cover">
-            <div class="book-info">
-                <h3>Book 6 Title</h3>
-                <p>分類: Historical Fiction</p>
-                <p>評分: 4.1</p>
-            </div>
-        </div>
         <!-- 顯示更多書籍... -->
 
         <div id="action-buttons">
-            <a href="{{ url_for('routes.borrow') }}" class="btn btn-primary">借書</a>
-            <a href="{{ url_for('routes.recommend') }}" class="btn btn-primary">還書</a>
-            <a href="{{ url_for('routes.index') }}" class="btn btn-primary">登出</a>
+            <a href="{{ url_for('routes.borrow') }}" class="borrow">借書</a>
+            <a href="{{ url_for('routes.recommend') }}" class="return">還書</a>
+            <a href="{{ url_for('routes.index') }}" class="logout">登出</a>
         </div>
     </div>
 </body>

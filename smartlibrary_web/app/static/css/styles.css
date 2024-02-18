@@ -38,7 +38,7 @@ header {
 }
 
 /* 新增的 CSS 样式，使相机区域的宽高相等 */
-#camera {
+#videoInput,#canvasOutput {
     width: 240px; /* 宽度 */
     height: 240px; /* 高度 */
     object-fit: cover; /* 图片保持比例覆盖整个区域 */

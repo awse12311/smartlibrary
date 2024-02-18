@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Detection using OpenCV.js</title>
+    <!-- 引入 OpenCV.js，並在載入完畢後執行 onOpenCvReady 函數 -->
+    <script async src="../static/js/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+</head>
+<body>
+    <h1>Face Detection using OpenCV.js</h1>
+    <!-- 預覽視頻流 -->
+    <video id="videoInput" width="640" height="480" autoplay></video>
+    <!-- 顯示識別結果的畫布 -->
+    <canvas id="canvasOutput" width="640" height="480"></canvas>
+    
+    <script>
+        // 定義當 OpenCV.js 加載完畢時要執行的初始化代碼
+        function onOpenCvReady() {
+            const video = document.getElementById('videoInput');
+            const canvasOutput = document.getElementById('canvasOutput');
+
+            // 載入人臉分類器
+            const classifier = new cv.CascadeClassifier();
+            classifier.load('haarcascade_frontalface_default.xml');
+
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.error('Unable to start Webcam:', error);
+                });
+
+            video.addEventListener('play', () => {
+                const FPS = 30;
+                setInterval(() => {
+                    if (video.paused || video.ended) {
+                        return;
+                    }
+
+                    // 將視頻帧顯示在畫布上
+                    const context = canvasOutput.getContext('2d');
+                    context.drawImage(video, 0, 0, canvasOutput.width, canvasOutput.height);
+
+                    // 將畫布上的圖像轉換為 OpenCV Mat 格式
+                    let src = cv.imread(canvasOutput);
+                    let gray = new cv.Mat();
+                    cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+
+                    // 檢測人臉
+                    let faces = new cv.RectVector();
+                    classifier.detectMultiScale(gray, faces, 1.1, 3, 0);
+
+                    // 在畫布上繪製矩形框
+                    for (let i = 0; i < faces.size(); ++i) {
+                        let face = faces.get(i);
+                        let point1 = new cv.Point(face.x, face.y);
+                        let point2 = new cv.Point(face.x + face.width, face.y + face.height);
+                        cv.rectangle(src, point1, point2, [255, 0, 0, 255]);
+                    }
+
+                    // 將處理後的圖像顯示在畫布上
+                    cv.imshow(canvasOutput, src);
+                    src.delete();
+                    gray.delete();
+                    faces.delete();
+                }, 1000 / FPS);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -54,3 +54,15 @@ def closed_video_stream():
     closed = True
     asyncio.sleep(1)
     return redirect(url_for('routes.register'))
+
+@bp.route('/opencv.js')
+def opencv():
+    return render_template('opencv.js')
+
+@bp.route('/haarcascade_frontalface_default.xml')
+def haarcascade_frontalface_default():
+    return render_template('haarcascade_frontalface_default.xml')
+
+@bp.route('/utils.js')
+def utils():
+    return render_template('utils.js')
