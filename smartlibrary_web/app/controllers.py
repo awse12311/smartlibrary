@@ -67,7 +67,7 @@ def haarcascade_frontalface_default():
 @bp.route('/utils.js')
 def utils():
     return render_template('utils.js')
-
+# --------------------------------------------------------------------------------------------------------
 @bp.route('/login', methods=['POST'])
 def login():
     # 從 POST 請求中獲取用戶名和密碼
@@ -105,16 +105,21 @@ def save_image():
         import traceback
         traceback.print_exc()
         return str(e), 500
+    
+
 # 註冊的函式
-# def register():
-#     email = request.json.get('email')
-#     username = request.json.get('username')
-#     password = request.json.get('password')
-#     check, register_result = LoginService.user_register(email=email, password=password, username=username)
-#     if check:
-#         print(f'註冊成功 會員ID為 {register_result}')
-#     else:
-#         print(f'註冊失敗 原因 {register_result}')
+@bp.route('/registe', methods=['POST'])
+def registe():
+    email = request.json.get('email')
+    password = request.json.get('password')
+    booktype = request.json.get('booktype')
+    print(request.json)
+    return '',200
+    # check, register_result = LoginService.user_register(email=email, password=password, username=username)
+    # if check:
+    #     print(f'註冊成功 會員ID為 {register_result}')
+    # else:
+    #     print(f'註冊失敗 原因 {register_result}')
 
     # 在這裡進行登入驗證和相應的處理
 

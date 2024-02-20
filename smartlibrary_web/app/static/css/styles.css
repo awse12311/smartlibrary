@@ -1,61 +1,83 @@
-/* 整体页面样式 */
+/* 整體頁面樣式 */
 body {
-    font-family: Arial, sans-serif; /* 使用 Arial 字体 */
-    margin: 0; /* 移除页面默认边距 */
-    display: flex; /* 使用 Flex 布局 */
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中 */
-    height: 100vh; /* 设置高度为视口高度的百分比 */
-    background: url("../images/bookshelf-413705_1280.jpg") center center/cover no-repeat; /* 背景图片设置 */
-    background-size: cover; /* 背景图片等比例覆盖整个容器 */
+    font-family: Arial, sans-serif; /* 使用 Arial 字體 */
+    margin: 0; /* 移除頁面預設邊距 */
+    display: flex; /* 使用 Flex 佈局 */
+    align-items: center; /* 垂直置中 */
+    justify-content: center; /* 水平置中 */
+    height: 100vh; /* 設置高度為視口高度的百分比 */
+    background: url("../images/bookshelf-413705_1280.jpg") center center/cover no-repeat; /* 背景圖片設置 */
+    background-size: cover; /* 背景圖片等比例覆蓋整個容器 */
 }
 
-/* 页眉样式 */
+/* 頁眉樣式 */
 header {
-    text-align: center; /* 文字居中 */
-    padding: 20px; /* 页眉内边距 */
-    color: white; /* 文字颜色 */
-    position: absolute; /* 绝对定位 */
-    top: 10px; /* 与顶部的距离 */
-    left: 10px; /* 与左侧的距离 */
-    background: rgb(0, 0, 0); /* 背景颜色 */
+    text-align: center; /* 文字置中 */
+    padding: 20px; /* 頁眉內邊距 */
+    color: white; /* 文字顏色 */
+    position: absolute; /* 絕對定位 */
+    top: 10px; /* 與頂部的距離 */
+    left: 10px; /* 與左側的距離 */
+    background: rgb(0, 0, 0); /* 背景顏色 */
 }
 
-/* 主容器样式 */
+/* 主容器樣式 */
 .container {
-    display: flex; /* 使用 Flex 布局 */
-    justify-content: center; /* 水平居中 */
-    position: relative; /* 相对定位 */
-    z-index: 1; /* 设置 z-index */
+    width: 2000px;
+    display: flex; /* 使用 Flex 佈局 */
+    justify-content: center; /* 水平置中 */
+    position: relative; /* 相對定位 */
+    z-index: 1; /* 設置 z-index */
 }
 
-/* 相机容器和登录容器样式 */
-.camera-container, .login-container {
-    border: 1px solid #ccc; /* 边框样式 */
-    padding: 20px; /* 内边距 */
-    margin: 10px; /* 外边距 */
-    background: rgba(255, 255, 255, 0.8); /* 背景透明度设置为 0.8 */
-}
-
-/* 新增的 CSS 样式，使相机区域的宽高相等 */
-#videoInput,#canvasOutput {
-    width: 240px; /* 宽度 */
-    height: 240px; /* 高度 */
-    object-fit: cover; /* 图片保持比例覆盖整个区域 */
-    display: block; /* 块级元素 */
-    margin-left: auto; /* 左右居中 */
-    margin-right: auto; /* 左右居中 */
-}
-
-/* 相机容器样式 */
+/* 相機容器和登錄容器樣式 */
 .camera-container {
-    flex: 1; /* 占据剩余空间 */
+    border: 1px solid #ccc; /* 邊框樣式 */
+    font-size: 30px; /* 調整容器中文字的大小 */
+    width: 900px; /* 調整容器的寬度 */
+    height: 700px; /* 調整容器的高度 */
+    padding: 30px; /* 增加容器的內邊距 */
+    margin: 10px; /* 外邊距 */
+    background: rgba(255, 255, 255, 0.8); /* 背景透明度設置為 0.8 */
 }
 
-/* 按钮样式 */
+.login-container {
+    border: 1px solid #ccc; /* 邊框樣式 */
+    font-size: 30px; /* 調整容器中文字的大小 */
+    width: 600px; /* 調整容器的寬度 */
+    height: 700px; /* 調整容器的高度 */
+    padding: 30px; /* 增加容器的內邊距 */
+    margin: 10px; /* 外邊距 */
+    background: rgba(255, 255, 255, 0.8); /* 背景透明度設置為 0.8 */
+}
+
+/* 新增的 CSS 樣式，使相機區域的寬高相等 */
+#videoInput,#canvasOutput {
+    width: 500px; /* 寬度 */
+    height: 500px; /* 高度 */
+    object-fit: cover; /* 圖片保持比例覆蓋整個區域 */
+    display: block; /* 塊級元素 */
+    margin-left: auto; /* 左右置中 */
+    margin-right: auto; /* 左右置中 */
+}
+
+/* 相機容器樣式 */
+.camera-container {
+    flex: 1; /* 佔據剩餘空間 */
+}
+
+/* 按鈕樣式 */
 button {
-    padding: 10px; /* 内边距 */
-    margin-top: 10px; /* 顶部外边距 */
-    cursor: pointer; /* 鼠标指针样式 */
+    padding: 10px; /* 內邊距 */
+    margin-top: 10px; /* 頂部外邊距 */
+    cursor: pointer; /* 鼠標指針樣式 */
+}
+
+h2 {
+    font-size: 50px; /* 將字體大小設置為 24 像素 */
+}
+
+h1 {
+    font-size: 50px; /* 將字體大小設置為 24 像素 */
 }
 

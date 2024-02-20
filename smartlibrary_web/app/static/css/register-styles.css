@@ -29,43 +29,50 @@ header {
 }
 
 /* 注册容器和相机容器样式 */
-.register-container, .camera-container {
+.register-container {
+    height: 700px; /* 調整容器的高度 */
     border: 1px solid #ccc; /* 边框样式 */
     padding: 20px; /* 内边距 */
     background: rgba(255, 255, 255, 0.8); /* 背景透明度设置为 0.8 */
+    font-size: 30px; /* 調整容器中文字的大小 */
     text-align: center; /* 文字居中 */
 }
 
-/* 相机容器样式，使其宽度自适应 */
 .camera-container {
-    flex: 1; /* 占据剩余空间 */
-    max-width: 320px; /* 设置最大宽度 */
-    margin: 10px; /* 外边距 */
+    border: 1px solid #ccc; /* 邊框樣式 */
+    font-size: 30px; /* 調整容器中文字的大小 */
+    width: 500px; /* 調整容器的寬度 */
+    height: 700px; /* 調整容器的高度 */
+    padding: 30px; /* 增加容器的內邊距 */
+    margin: 10px; /* 外邊距 */
+    background: rgba(255, 255, 255, 0.8); /* 背景透明度設置為 0.8 */
 }
+
+
 
 video {
     margin-bottom: 10px; /* 底部外边距 */
-    width: 100%; /* 宽度占满父容器 */
+    width: 300px; /* 寬度 */
+    height: 300px; /* 高度 */
 }
 
 button {
-    padding: 10px; /* 内边距 */
-    margin-top: 10px; /* 顶部外边距 */
-    cursor: pointer; /* 鼠标指针样式 */
+    padding: 10px; /* 內邊距 */
+    margin-top: 10px; /* 頂部外邊距 */
+    cursor: pointer; /* 鼠標指針樣式 */
 }
 
 /* 照片样式 */
 #photo {
-    max-width: 100%; /* 最大宽度100% */
-    height: 240px; /* 高度固定为240px */
-    margin-top: 10px; /* 顶部外边距 */
+    width: 240px; /* 寬度 */
+    height: 240px; /* 高度 */
     object-fit: cover; /* 图片保持比例覆盖整个区域 */
 }
 
 /* 相机样式 */
 #camera {
-    width: 100%; /* 宽度占满父容器 */
-    height: auto; /* 高度自适应 */
+    width: 240px; /* 寬度 */
+    height: 240px; /* 高度 */
     object-fit: cover; /* 图片保持比例覆盖整个区域 */
 }
 
@@ -99,4 +106,8 @@ button {
     flex: 0 0 calc(33.333% - 10px); /* 设置宽度，考虑到 margin */
     margin-right: 10px; /* 右外边距 */
     margin-bottom: 10px; /* 底部外边距 */
+}
+
+.checkbox-container label {
+    font-size: 20px; /* 將字體大小設置為 14px */
 }

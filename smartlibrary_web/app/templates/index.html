@@ -18,11 +18,13 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 camera-container">
-                <h2>請將您的正臉至於鏡頭前</h2>
+                <h2 class="text-center">請將您的正臉至於鏡頭前</h2>
                 <!-- 將寬度和高度設置為相等，創造一個正方形的 video 元素 -->
                 <canvas id="canvasOutput" width="320" height="240"></canvas>
                 <video id="videoInput" width="320" height="240" autoplay style="display: none;"></video>
-                <button type="button" class="btn btn-primary" onclick="face_login()">人臉偵測自動填寫帳號密碼</button>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary" onclick="face_login()" style="font-size: 30px;">人臉偵測自動登入</button>
+                </div>
             </div>
             <div class="col-md-6 login-container p-4">
                 <h2 class="text-center">登入</h2>
@@ -36,9 +38,10 @@
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                     <!-- <button type="button" class="btn btn-primary" onclick="login()">Login</button> -->
-                    <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+                    <button type="button" class="btn btn-primary" onclick="login()" style="font-size: 30px;">Login</button>
                 </form>
-                <p class="mt-3">沒有帳號? <a id="register-link" class="btn btn-link" href="{{ url_for('routes.closed_video_stream') }}" >點此前往註冊</a></p>
+                <p class="mt-3">沒有帳號? <a id="register-link" class="btn btn-link" href="{{ url_for('routes.closed_video_stream') }}" style="font-size: 30px;">點此前往註冊</a>
+                </p>
             </div>
         </div>
     </div>
