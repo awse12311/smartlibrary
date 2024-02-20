@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
     </header>
     <div class="container">
         <!-- 拍照部分 -->
-        <div class="camera-container">
+        <div class="col-md-6 camera-container">
             <h2>拍照</h2>
             <video id="camera" width="320" height="240" autoplay></video>
             <button type="button" onclick="takePhoto()" class="btn btn-primary">拍照</button>
@@ -23,7 +23,7 @@
             <img id="photo" alt="照片預覽" style="display: none;">
         </div>
         <!-- 註冊內容填寫部分 -->
-        <div class="register-container">
+        <div class="col-md-6 register-container">
             <h2>註冊</h2>
             <form id="register-form">
                 <div class="mb-3">
@@ -34,29 +34,54 @@
                     <label for="new-password" class="form-label">新密碼:</label>
                     <input type="password" class="form-control" id="new-password" name="new-password" required>
                 </div>
-                <div class="mb-3">
+                <div class="col-md-12">
                     <label for="book-type">喜愛的書籍類型:</label>
                     <div class="checkbox-container">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="fiction" id="book-fiction" name="book-type">
-                            <label class="form-check-label" for="book-fiction">小說</label>
+                            <label class="form-check-label" for="book-Arts and Literature">藝術文學</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="non-fiction" id="book-non-fiction" name="book-type">
-                            <label class="form-check-label" for="book-non-fiction">非小說</label>
+                            <label class="form-check-label" for="book-Biographies and Memoirs">傳記與回憶錄</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="history" id="book-history" name="book-type">
-                            <label class="form-check-label" for="book-history">歷史書籍</label>
+                            <label class="form-check-label" for="book-Education and Reference">教育與參考資料</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="cooking" id="book-cooking" name="book-type">
-                            <label class="form-check-label" for="book-cooking">料理書籍</label>
+                            <label class="form-check-label" for="book-Health and Life">健康生活</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="horror" id="book-horror" name="book-type">
-                            <label class="form-check-label" for="book-horror">恐怖小說</label>
+                            <label class="form-check-label" for="book-Literature">文學</label>
                         </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="horror" id="book-horror" name="book-type">
+                            <label class="form-check-label" for="book-History and Culture">歷史文化</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="horror" id="book-horror" name="book-type">
+                            <label class="form-check-label" for="book-Novel">小說</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="religion" id="book-religion" name="book-type">
+                            <label class="form-check-label" for="book-Religion and Philosophy">宗教哲學</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="science" id="book-science" name="book-type">
+                            <label class="form-check-label" for="book-Science and Nature">科學自然</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="social-science" id="book-social-science" name="book-type">
+                            <label class="form-check-label" for="book-Social Sciences">社會科學</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="travel" id="book-travel" name="book-type">
+                            <label class="form-check-label" for="book-Tourism and Geography">旅遊地理</label>
+                        </div>
+                        
                     </div>
                 </div>
                 

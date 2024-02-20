@@ -12,8 +12,8 @@ class LoginService:
                     if password == user["password"]:
                         return True, user["username"] # 登入成功 回傳使用者名稱
                     else:
-                        return False, "wrong password" # 登入失敗 回傳密碼錯誤
-            return False, "not found" # 登入失敗 回傳找不到該使用者
+                        return False, "密碼錯誤" # 登入失敗 回傳密碼錯誤
+            return False, "找不到該用戶" # 登入失敗 回傳找不到該使用者
         except Exception as e:
             raise e
         

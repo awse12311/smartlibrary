@@ -1,6 +1,6 @@
 #from app import db
 #from app.models import User
-from flask import render_template,Response,Blueprint,redirect, url_for,request
+from flask import render_template,Response,Blueprint,redirect, url_for,request,jsonify
 from app.models import face_encoding
 from .services.login_service import LoginService
 
@@ -74,13 +74,12 @@ def login():
     email = request.json.get('username') #把前面的user改成email
     password = request.json.get('password')
     check, login_result = LoginService.user_login_check(email=email, password=password)
-    # 在後端終端中列印用戶名和密碼
+    # 在這裡進行登入驗證和相應的處理
+    # 在後端終端中列印用戶名和密碼並回傳http回應的狀態碼
     if check:
         print(f'登入成功 歡迎 {login_result}')
+        return jsonify({'success': True, 'user': login_result}), 200
     else:
         print(f'登入失敗 原因 {login_result}')
-
-    # 在這裡進行登入驗證和相應的處理
-
-    # 返回成功的 HTTP 狀態碼
-    return '', 200
+        return jsonify({'success': False, 'user': login_result}), 401
+    
