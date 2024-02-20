@@ -8,11 +8,13 @@ from fetch_data_service import FetchService
 # 傳入鏡頭獲取的圖片(資料類型為npy陣列) 回傳辨識結果(臉部數量超過回傳-1 沒有搜尋到匹配者回傳-1 搜尋到匹配者回傳ID)
 class CameraService:
     def __init__(self):
+        self.login_temp_png = "smartlibrary_web\database\login_temp.png"
+        self.login_temp_npy = "smartlibrary_web\database\login_temp.npy"
         self.face_rec_model = face_recognition.api.face_encodings
         self.face_embeddings = []
         self.database = []
         self.update_embeddings()
-        self.frame = cv2.imread("SmartLibraryAPI/app/content/temp/login_temp.png")
+        self.frame = cv2.imread(self.login_temp)
 
     # embeddings更新資料
     def update_embeddings(self):
@@ -25,7 +27,7 @@ class CameraService:
                 user_id = name["user_id"]
                 print("載入資料: " + user_id)
                 self.database.append({"username":username, "user_id":user_id})
-                self.face_embeddings.append(np.load("SmartLibraryAPI/app/content/source/npy/" + user_id + ".npy"))
+                self.face_embeddings.append(np.load("smartlibrary_web\database\\"+ user_id + ".npy"))
         except Exception as e:
             raise e
 
@@ -124,12 +126,12 @@ class CameraService:
             elif face_num > 1: # 超過一個臉
                 return "over_face"
             elif user_id == -1: # 找到臉但沒有匹配者
-                cv2.imwrite("SmartLibraryAPI/app/content/temp/login_temp.jpg", face_image)
-                np.save("SmartLibraryAPI/app/content/temp/login_temp.npy", face_embedding)
+                cv2.imwrite(self.login_temp_png, face_image)
+                np.save(self.login_temp_npy, face_embedding)
                 return "no_register"
             else: # 找到臉且已匹配
-                cv2.imwrite("SmartLibraryAPI/app/content/temp/login_temp.jpg", face_image)
-                np.save("SmartLibraryAPI/app/content/temp/login_temp.npy", face_embedding)
+                cv2.imwrite(self.login_temp_png, face_image)
+                np.save(self.login_temp_npy, face_embedding)
                 return user_id
         except Exception as e:
             raise e

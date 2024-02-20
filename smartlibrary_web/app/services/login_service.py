@@ -18,8 +18,14 @@ class LoginService:
             raise e
         
     @staticmethod
-    def user_register(password, user_name:str, email:str):
+    def user_register(username:str, email:str, password):
         try:
-            pass # 需要用post把上面三個變數傳入，然後回傳True或ID
+            data = {
+            "username": username,
+            "password": password,
+            "email": email
+            }
+            result = FetchService().user_register(data=data)
+            return result
         except Exception as e:
             raise e

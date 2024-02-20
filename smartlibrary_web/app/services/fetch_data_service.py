@@ -55,4 +55,21 @@ class FetchService:
             except requests.exceptions.RequestException as e:
                 print("Error fetching JSON data:", e)
                 return None
-    # 後續根據需求自行增加
+            
+    def user_register(self, data):
+        try:
+            sign_up_user = self.url + "/api/users/"
+            response = requests.post(sign_up_user, json=data)  # 向 API 發送 POST 請求提交用戶資料
+            if response.status_code == 201:
+                user_list = self.get_all_users()
+                # 遍歷所有用戶資料 確認信箱符合後回傳ID
+                user_id = [user["user_id"] for user in user_list if user["email"] == data["email"]]
+                return True, user_id[0]  # 如果註冊成功，返回 使用者ID
+            else:
+                return False, "email duplicate"  # 如果註冊失敗，返回 False
+        except requests.exceptions.RequestException as e:
+            print(e)  # 請求異常，印出錯誤訊息
+            return False  # 返回 False，表示註冊失敗
+        
+if __name__ == "__main__":
+    pass
