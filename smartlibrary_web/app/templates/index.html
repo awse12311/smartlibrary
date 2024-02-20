@@ -20,8 +20,8 @@
             <div class="col-md-6 camera-container">
                 <h2>請將您的正臉至於鏡頭前</h2>
                 <!-- 將寬度和高度設置為相等，創造一個正方形的 video 元素 -->
-                <video id="videoInput" width="320" height="240" autoplay hidden></video>
                 <canvas id="canvasOutput" width="320" height="240"></canvas>
+                <video id="videoInput" width="320" height="240" autoplay style="display: none;"></video>
             </div>
             <div class="col-md-6 login-container p-4">
                 <h2 class="text-center">登入</h2>
@@ -35,7 +35,7 @@
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                     <!-- <button type="button" class="btn btn-primary" onclick="login()">Login</button> -->
-                    <a type="button" class="btn btn-primary" href="{{ url_for('routes.user') }}">Login</a>
+                    <button type="button" class="btn btn-primary" onclick="login()">Login</button>
                 </form>
                 <p class="mt-3">沒有帳號? <a id="register-link" class="btn btn-link" href="{{ url_for('routes.closed_video_stream') }}" >點此前往註冊</a></p>
             </div>
