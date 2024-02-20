@@ -1,6 +1,6 @@
 #from app import db
 #from app.models import User
-from flask import render_template,Response,Blueprint,redirect, url_for
+from flask import render_template,Response,Blueprint,redirect, url_for,request
 from app.models import face_encoding
 
 # 創建一個 Blueprint 實例
@@ -66,3 +66,17 @@ def haarcascade_frontalface_default():
 @bp.route('/utils.js')
 def utils():
     return render_template('utils.js')
+
+@bp.route('/login', methods=['POST'])
+def login():
+    # 從 POST 請求中獲取用戶名和密碼
+    username = request.json.get('username')
+    password = request.json.get('password')
+
+    # 在後端終端中列印用戶名和密碼
+    print(f'Username: {username}, Password: {password}')
+
+    # 在這裡進行登入驗證和相應的處理
+
+    # 返回成功的 HTTP 狀態碼
+    return '', 200
