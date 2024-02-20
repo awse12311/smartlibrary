@@ -70,9 +70,28 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function login() {
+    // 取得帳號和密碼
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Add your login logic here
-    console.log('Login clicked. Username:', username, 'Password:', password);
+    // 使用 fetch 發送 POST 請求到後端
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username, password: password })
+    })
+    .then(response => {
+        if (response.ok) {
+            // 登入成功，可以執行相應的操作
+            console.log('Login successful');
+        } else {
+            // 登入失敗，處理錯誤
+            console.error('Login failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
