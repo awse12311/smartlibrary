@@ -90,10 +90,9 @@ def save_image():
     image_data_base64 = request.json.get('image')
     try:
         # 解码 base64 编码的图像数据为 bytes
-        image_data_bytes = base64.b64decode(image_data_base64)
         # 将图像数据保存到文件
-        with open('path/to/save/image.png', 'wb') as f:
-            f.write(image_data_bytes)
+        with open('D:\\smartlibrary\\smartlibrary_web\\database\\login_temp.png', 'wb') as f:
+            f.write(image_data_base64)
         # 返回成功的 HTTP 状态码
         return '', 200
     except Exception as e:
