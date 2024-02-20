@@ -86,14 +86,19 @@ def login():
 # 存登入拍照圖片的函数
 @bp.route('/save_image', methods=['POST'])
 def save_image():
-    # 从 POST 请求中获取图像数据的 base64 编码字符串
+    # 從 POST 請求獲取圖片資料的 base64 編碼字串
     image_data_base64 = request.json.get('image')
+    # print('--------------------------------------------')
+    # print(image_data_base64)
+    image_data_base64 = image_data_base64.split(',')[-1]
+    # print('--------------------------------------------')
+    # print(image_data_base64)
     try:
-        # 解码 base64 编码的图像数据为 bytes
-        # 将图像数据保存到文件
+        # 解碼 base64 編碼的圖像數據为 bytes
+        # 將圖像數據保存到文件
         with open('D:\\smartlibrary\\smartlibrary_web\\database\\login_temp.png', 'wb') as f:
-            f.write(image_data_base64)
-        # 返回成功的 HTTP 状态码
+            f.write(base64.b64decode(image_data_base64))
+        # 返回成功的 HTTP 狀態碼
         return '', 200
     except Exception as e:
         print("Error occurred:", e)
