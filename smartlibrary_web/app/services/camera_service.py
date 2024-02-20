@@ -3,7 +3,7 @@ import cv2
 import face_recognition
 import numpy as np
 from scipy.spatial import distance
-from fetch_data_service import FetchService
+from .fetch_data_service import FetchService
 
 # 傳入鏡頭獲取的圖片(資料類型為npy陣列) 回傳辨識結果(臉部數量超過回傳-1 沒有搜尋到匹配者回傳-1 搜尋到匹配者回傳ID)
 class CameraService:

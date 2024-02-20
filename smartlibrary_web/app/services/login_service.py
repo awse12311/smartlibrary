@@ -1,6 +1,6 @@
 # services/login_service.py
-from fetch_data_service import FetchService
-from camera_service import CameraService
+from .fetch_data_service import FetchService
+from .camera_service import CameraService
 
 class LoginService:
 

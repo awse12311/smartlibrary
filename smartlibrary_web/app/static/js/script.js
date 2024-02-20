@@ -23,6 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
         let cap = new cv.VideoCapture(video);
         let faces = new cv.RectVector();
         let classifier = new cv.CascadeClassifier();
+        let minWidth = 100;
+        let minHeight = 100;
+        let minSize = new cv.Size(minWidth, minHeight);
+        let scaleFactor = 1.1;
+        let minNeighbors = 3;
+        let flags = 0;
         
         // load pre-trained classifiers using utils
         let utils = new Utils('errorMessage');
@@ -40,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     src.copyTo(dst);
                     cv.cvtColor(dst, gray, cv.COLOR_RGBA2GRAY, 0);
                     // detect faces.
-                    classifier.detectMultiScale(gray, faces, 1.1, 3, 0);
+                    classifier.detectMultiScale(gray, faces, scaleFactor, minNeighbors, flags, minSize);
                     // draw faces.
                     for (let i = 0; i < faces.size(); ++i) {
                         let face = faces.get(i);
