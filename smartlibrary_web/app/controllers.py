@@ -83,3 +83,21 @@ def login():
         print(f'登入失敗 原因 {login_result}')
         return jsonify({'success': False, 'user': login_result}), 401
     
+
+
+# 註冊的函式
+# def register():
+#     email = request.json.get('email')
+#     username = request.json.get('username')
+#     password = request.json.get('password')
+#     check, register_result = LoginService.user_register(email=email, password=password, username=username)
+#     if check:
+#         print(f'註冊成功 會員ID為 {register_result}')
+#     else:
+#         print(f'註冊失敗 原因 {register_result}')
+
+    # 在這裡進行登入驗證和相應的處理
+
+    # 返回成功的 HTTP 狀態碼
+
+
