@@ -1,5 +1,6 @@
 # services/login_service.py
-from .fetch_data_service import FetchService
+from fetch_data_service import FetchService
+from camera_service import CameraService
 
 class LoginService:
 
@@ -25,7 +26,14 @@ class LoginService:
             "password": password,
             "email": email
             }
-            result = FetchService().user_register(data=data)
-            return result
+            check, result = FetchService().user_register_data(data=data)
+            if check:
+                CameraService().save_temp_to_data(user_id=result)
+            return check, result
         except Exception as e:
             raise e
+        
+if __name__ == "__main__":
+    # result = LoginService.user_register(username="7441444", email="7441444", password="7441444")
+    # print(result)
+    pass

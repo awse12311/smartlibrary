@@ -8,13 +8,12 @@ from fetch_data_service import FetchService
 # 傳入鏡頭獲取的圖片(資料類型為npy陣列) 回傳辨識結果(臉部數量超過回傳-1 沒有搜尋到匹配者回傳-1 搜尋到匹配者回傳ID)
 class CameraService:
     def __init__(self):
-        self.login_temp_png = "smartlibrary_web\database\login_temp.png"
+        self.login_temp_png = "smartlibrary_web\database\login_temp.jpg"
         self.login_temp_npy = "smartlibrary_web\database\login_temp.npy"
         self.face_rec_model = face_recognition.api.face_encodings
         self.face_embeddings = []
         self.database = []
-        self.update_embeddings()
-        self.frame = cv2.imread(self.login_temp)
+        self.frame = cv2.imread(self.login_temp_png)
 
     # embeddings更新資料
     def update_embeddings(self):
@@ -82,6 +81,7 @@ class CameraService:
 
     # 捕捉其中一幀 檢測臉部並保存嵌入
     def recogintion_face_for_image(self):
+        self.update_embeddings()
         try:
             frame = self.frame
             # 將幀轉換為 RGB 格式（face_recognition 使用 RGB）
@@ -149,6 +149,12 @@ class CameraService:
             return False
         except Exception as e:
             raise e
+    
+    def save_temp_to_data(self, user_id:str):
+        # 讀取暫存檔的npy和jpg 並以ID命名後存到資料內
+        temp_npy = np.load("smartlibrary_web\database\login_temp.npy")
+        cv2.imwrite(f"smartlibrary_web\database\{user_id}.jpg", self.frame)
+        np.save(f"smartlibrary_web\database\{user_id}.npy", temp_npy)
 
     # def create_user(data):
     #     try:

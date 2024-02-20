@@ -56,7 +56,7 @@ class FetchService:
                 print("Error fetching JSON data:", e)
                 return None
             
-    def user_register(self, data):
+    def user_register_data(self, data):
         try:
             sign_up_user = self.url + "/api/users/"
             response = requests.post(sign_up_user, json=data)  # 向 API 發送 POST 請求提交用戶資料

@@ -84,7 +84,6 @@ def login():
         return jsonify({'success': False, 'user': login_result}), 401
     
 
-
 # 註冊的函式
 # def register():
 #     email = request.json.get('email')
