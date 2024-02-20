@@ -104,4 +104,65 @@ function login() {
     });
 }
 
+function face_login() {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
 
+    // 確保 video 元素的 videoWidth 和 videoHeight 屬性已經設置
+    if (video.videoWidth > 0 && video.videoHeight > 0) {
+        // 設置 canvas 寬度和高度等於 video 寬度和高度
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        // 將 video 幀繪製到 canvas 上
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // 將 canvas 圖像轉換為 base64 格式
+        const imageData = canvas.toDataURL('image/png');
+
+        // 使用 fetch 將圖像數據發送到後端
+        fetch('/save_image', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ image: imageData })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Image saved successfully');
+            } else {
+                console.error('Failed to save image');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    } else {
+        console.error('Video metadata not loaded yet');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 獲取 video 元素並設置其來源為用戶的攝像頭
+    video = document.getElementById('videoInput');
+
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+        .then(function(stream) {
+            video.srcObject = stream;
+        })
+        .catch(function(error) {
+            console.error('Unable to start Webcam:', error);
+        });
+
+    // 綁定 face_login 函數到按鈕的點擊事件
+    const faceLoginButton = document.getElementById('faceLoginButton');
+    if (faceLoginButton) {
+        faceLoginButton.addEventListener('click', face_login);
+    }
+
+    // 確保 video 元素的元數已經加載完畢
+    video.addEventListener('loadedmetadata', function() {
+        console.log('Video metadata loaded');
+    });
+});

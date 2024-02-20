@@ -3,7 +3,7 @@
 from flask import render_template,Response,Blueprint,redirect, url_for,request,jsonify
 from app.models import face_encoding
 from .services.login_service import LoginService
-
+import base64
 # 創建一個 Blueprint 實例
 #from app import db
 import asyncio
@@ -83,7 +83,36 @@ def login():
         print(f'登入失敗 原因 {login_result}')
         return jsonify({'success': False, 'user': login_result}), 401
     
+# 存登入拍照圖片的函数
+@bp.route('/save_image', methods=['POST'])
+def save_image():
+    # 从 POST 请求中获取图像数据的 base64 编码字符串
+    image_data_base64 = request.json.get('image')
 
+    # 統計填充字符 '=' 的数量
+    num_padding = image_data_base64.count('=')
+
+    # 添加填充字符 '=' 直到長度是4的倍数
+    image_data_base64 += '=' * (4 - (len(image_data_base64) + num_padding) % 4) 
+
+    # 將圖像數據的 base64 编码字符串解碼為 bytes
+    image_data_bytes = base64.b64decode(image_data_base64)
+
+    # 打印 Base64 編碼字符串的长度
+    print("Base64 string length:", len(image_data_base64))
+
+    try:
+        # 將圖像數據保存為PNG格式文件
+        with open('D:\\smartlibrary\\smartlibrary_web\\database\\login_temp.png', 'wb') as f:
+            f.write(image_data_bytes)
+
+        # 返回成功的 HTTP 狀態碼
+        return '', 200
+    except Exception as e:
+        print("Error occurred:", e)
+        import traceback
+        traceback.print_exc()
+        return str(e), 500
 # 註冊的函式
 # def register():
 #     email = request.json.get('email')
