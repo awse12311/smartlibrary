@@ -26,12 +26,13 @@ def register():
     # 渲染名為 'register.html' 的模板並返回
     return render_template('register.html')
 
-@bp.route('/user')
-def user():
+@bp.route('/user/<userid>')
+def user(userid):
+    print('1111111',userid)
     global closed
     closed = True
     # 渲染名為 'user.html' 的模板並返回
-    return render_template('user.html')
+    return render_template('user.html',  userid=userid)
 
 @bp.route('/recommend')
 def recommend():
