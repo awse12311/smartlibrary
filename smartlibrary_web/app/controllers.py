@@ -116,9 +116,10 @@ def registe():
     booktype = request.json.get('booktype')
     username = request.json.get('username')
     print(booktype)
+    print(email)
     check, register_result = LoginService.user_register(email=email, password=password, username=username, booktype=booktype)
     if check:
-        return register_result,200
+        return '',200
     else:
         return ''
     # if check:
