@@ -3,6 +3,7 @@
 from flask import render_template,Response,Blueprint,redirect, url_for,request,jsonify
 from app.models import face_encoding
 from .services.login_service import LoginService
+from .services.camera_service import CameraService
 import base64
 # 創建一個 Blueprint 實例
 #from app import db
@@ -128,4 +129,13 @@ def registe():
 
     # 返回成功的 HTTP 狀態碼
 
+@bp.route('/check_face', methods=['POST'])
+def check_face():
+    result = CameraService().recogintion_face_for_image()
+    if result == "no_face":
+        pass
+    elif result == "no_register":
+        pass
+    elif result == "over_face":
+        pass
 
