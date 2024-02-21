@@ -70,7 +70,6 @@ function register() {
     var newEmail = document.getElementById('new-email').value;
     var newUsername = document.getElementById('new-username').value;
     var newPassword = document.getElementById('new-password').value;
-
     // 檢查表單是否填寫完整
     if (!newEmail || !newUsername || !newPassword) {
         alert('請填寫所有欄位！');
@@ -85,16 +84,16 @@ function register() {
     }
 
     // 獲取勾選的書籍類型
-    var bookTypes = [];
+    var booktype = [];
     var checkboxes = document.getElementsByName('book-type');
     var atLeastOneChecked = false; // 添加變量來檢查是否至少有一個書籍類型被勾選
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
             atLeastOneChecked = true; // 如果有勾選的書籍類型，則將變量設置為 true
-            bookTypes.push(checkbox.value);
+            booktype.push(checkbox.value);
         }
     });
-
+    console.log(booktype)
     // 檢查是否至少有一項書籍類型被勾選
     if (!atLeastOneChecked) {
         alert('請至少選擇一項書籍類型！');
@@ -106,9 +105,9 @@ function register() {
         "email": newEmail,
         "username": newUsername,
         "password": newPassword,
-        "bookType": bookTypes
+        "booktype": booktype
     };
-
+    console.log(data)
     // 發送 POST 請求到後端
     fetch('/registe', {
         method: 'POST',
@@ -121,15 +120,11 @@ function register() {
         if (response.ok) {
             // 處理成功響應
             console.log('successfully')
+            alert('註冊成功！'); // 這裡您可以根據後端返回的數據執行不同的操作
+            window.location.href = '/'; // 註冊成功後重定向到登錄頁面
         } else {
             console.error('Failed');
         }
-    })
-    .then(data => {
-        // 處理後端返回的數據
-        console.log(data);
-        alert('註冊成功！'); // 這裡您可以根據後端返回的數據執行不同的操作
-        window.location.href = '/'; // 註冊成功後重定向到登錄頁面
     })
     .catch(error => {
         // 處理錯誤
