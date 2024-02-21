@@ -19,7 +19,7 @@ class LoginService:
             raise e
         
     @staticmethod
-    def user_register(username:str, email:str, password):
+    def user_register(username:str, email:str, password, booktype):
         try:
             data = {
             "username": username,
@@ -29,6 +29,7 @@ class LoginService:
             check, result = FetchService().user_register_data(data=data)
             if check:
                 CameraService().save_temp_to_data(user_id=result)
+                FetchService().save_user_interests_to_data(user_ins=booktype, user_id=result)
             return check, result
         except Exception as e:
             raise e
