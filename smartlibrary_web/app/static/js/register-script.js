@@ -28,6 +28,40 @@ function takePhoto() {
     // 顯示 img 元素
     document.getElementById('preview-heading').style.display = 'block';
     photo.style.display = 'block';
+    // 確保 video 元素的 videoWidth 和 videoHeight 屬性已經設置
+    if (video.videoWidth > 0 && video.videoHeight > 0) {
+        // 設置 canvas 寬度和高度等於 video 寬度和高度
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        // 將 video 幀繪製到 canvas 上
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // 將 canvas 圖像轉換為 base64 格式
+        const imageData = canvas.toDataURL('image/png');
+
+        // 使用 fetch 將圖像數據發送到後端
+        fetch('/save_image', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ image: imageData })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Image saved successfully');
+            } else {
+                console.error('Failed to save image');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    } else {
+        console.error('Video metadata not loaded yet');
+    }
+    
 }
 
 
