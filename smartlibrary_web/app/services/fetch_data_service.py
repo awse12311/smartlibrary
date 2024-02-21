@@ -88,6 +88,19 @@ class FetchService:
             print("Error fetching JSON data:", e)
             return None
         
+    def get_all_interest(self):
+        try:
+            response = requests.get(self.url + "/api/questionnaire_users_interests/")
+            response.raise_for_status()  # 確保沒有發生錯誤
+            json_data = response.json()  # 解析JSON回應
+            return json_data
+        except requests.exceptions.RequestException as e:
+            print("Error fetching JSON data:", e)
+            return None
+        
+    def get_user_interest_by_id(self, user_id):
+        interest = self.get_all_interest()
+        
 if __name__ == "__main__":
     #FetchService().save_user_interests_to_data(user_id=1, user_ins=[1,2,3,4])
     pass

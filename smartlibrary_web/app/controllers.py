@@ -4,6 +4,7 @@ from flask import render_template,Response,Blueprint,redirect, url_for,request,j
 from app.models import face_encoding
 from .services.login_service import LoginService
 from .services.camera_service import CameraService
+from .services.recommend_service import RecommendService
 import base64
 # 創建一個 Blueprint 實例
 #from app import db
@@ -119,6 +120,7 @@ def registe():
     print(email)
     check, register_result = LoginService.user_register(email=email, password=password, username=username, booktype=booktype)
     if check:
+        book_recommend = RecommendService.recommend_books_for_user(user_ins=booktype)
         return '',200
     else:
         return ''
