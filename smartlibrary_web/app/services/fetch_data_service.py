@@ -82,9 +82,12 @@ class FetchService:
                 response = requests.post(user_interests, json=data)
                 if response.status_code != 201:
                     print("ERROR")
+                else:
+                    print("SAVE_OK")
         except requests.exceptions.RequestException as e:
             print("Error fetching JSON data:", e)
             return None
         
 if __name__ == "__main__":
+    #FetchService().save_user_interests_to_data(user_id=1, user_ins=[1,2,3,4])
     pass
