@@ -24,7 +24,8 @@ body {
 
 /* 主容器样式 */
 #main-container {
-    max-width: 800px;
+    width: 1500px;
+    height: 600px;
     margin: 20px;
     padding: 20px;
     background: rgba(255, 255, 255, 0.8);
@@ -33,23 +34,28 @@ body {
 
 /* 歡迎信息样式 */
 #welcome-message {
-    font-size: 18px;
+    font-size: 50px;
     margin-bottom: 20px;
+}
+
+#book-container {
+    background: rgba(139, 139, 139, 0.637);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* 書籍樣式 */
 .book {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    align-items: center; /* 在主軸上居中對齊 */
+    width: 100%; /* 使用相同的寬度 */
+    margin-bottom: 20px; /* 可選：添加一些底部間距 */
 }
 
 .book img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-right: 10px;
+    width: 200px; /* 設定圖片的寬度 */
+    height: auto; /* 自動調整高度，保持圖片比例 */
 }
+
 
 .book-info {
     flex: 1;
@@ -57,12 +63,12 @@ body {
 
 .book-info h3 {
     margin: 0;
-    font-size: 16px;
+    font-size: 30px;
 }
 
 .book-info p {
     margin: 5px 0;
-    font-size: 14px;
+    font-size: 20px;
 }
 
 /* 操作按鈕樣式 */

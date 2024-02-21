@@ -97,9 +97,8 @@ function login() {
     .then(data => {
         // 在這裡處理從後端返回的 JSON 數據
         if (data.success) {
-            console.log(data.user.username)
-            alert('登入成功，歡迎 ' + data.user.user_id); // 在這裡添加 alert，包含成功登入的用戶名
-            // localStorage.setItem('userData', JSON.stringify(data));
+            console.log(data.user)
+            alert('登入成功，歡迎' + data.user.username); // 在這裡添加 alert，包含成功登入的用戶名
             window.location.href = '/user/' +  data.user.user_id; // 如果有需要，可以重定向到用戶首頁或其他頁面
         } else {
             alert('登入失敗: ' + data.user); // 在這裡添加 alert，包含登入失敗的原因

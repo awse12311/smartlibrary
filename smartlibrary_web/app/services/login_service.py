@@ -8,10 +8,11 @@ class LoginService:
     def user_login_check(email:str, password:str): # 可透過電子信箱登入
         try:
             user_infomation = FetchService().get_all_users()
+            
             for user in user_infomation:
                 if email == user["email"]:
                     if password == user["password"]:
-                        return True, user["username"] # 登入成功 回傳使用者名稱
+                        return True, user # 登入成功 回傳使用者資料
                     else:
                         return False, "密碼錯誤" # 登入失敗 回傳密碼錯誤
             return False, "找不到該使用者" # 登入失敗 回傳找不到該使用者

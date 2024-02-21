@@ -5,6 +5,7 @@ from app.models import face_encoding
 from .services.login_service import LoginService
 from .services.camera_service import CameraService
 from .services.recommend_service import RecommendService
+from .services.fetch_data_service import FetchService
 import base64
 # 創建一個 Blueprint 實例
 #from app import db
@@ -28,11 +29,10 @@ def register():
 
 @bp.route('/user/<userid>')
 def user(userid):
-    print('1111111',userid)
-    global closed
-    closed = True
+    userdata = FetchService().get_user_by_id(user_id=int(userid))
+    print(userdata)
     # 渲染名為 'user.html' 的模板並返回
-    return render_template('user.html',  userid=userid)
+    return render_template('user.html',  userid=userid ,userdata=userdata)
 
 @bp.route('/recommend')
 def recommend():
@@ -74,13 +74,14 @@ def utils():
 @bp.route('/login', methods=['POST'])
 def login():
     # 從 POST 請求中獲取用戶名和密碼
-    email = request.json.get('username') #把前面的user改成email
+    email = request.json.get('email') #把前面的user改成email
     password = request.json.get('password')
     check, login_result = LoginService.user_login_check(email=email, password=password)
+    print(login_result)
     # 在這裡進行登入驗證和相應的處理
     # 在後端終端中列印用戶名和密碼並回傳http回應的狀態碼
     if check:
-        print(f'登入成功 歡迎 {login_result}')
+        print(f'登入成功 歡迎 {login_result["username"]}')
         return jsonify({'success': True, 'user': login_result}), 200
     else:
         print(f'登入失敗 原因 {login_result}')
@@ -121,7 +122,7 @@ def registe():
     print(email)
     check, register_result = LoginService.user_register(email=email, password=password, username=username, booktype=booktype)
     if check:
-        book_recommend = RecommendService.recommend_books_for_user(user_ins=booktype)
+        # book_recommend = RecommendService.recommend_books_for_user(user_ins=booktype)
         return '',200
     else:
         return ''

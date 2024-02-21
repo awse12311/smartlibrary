@@ -12,36 +12,43 @@
         <h1>圖書館使用者介面</h1>
     </div>
 
-    <div id="main-container">
-        <div id="welcome-message">
-            歡迎使用者ID: <span id="user-id">YourUserID</span>
-        </div>
-
-        <div class="book">
-            <img src="book1.jpg" alt="Book 1 Cover">
-            <div class="book-info">
-                <h3>Book 1 Title</h3>
-                <p>分類: Fiction</p>
-                <p>評分: 4.5</p>
+    <div id="main-container" style="display: flex; flex-direction: column;">
+        <div id="welcome-message" style="display: flex; flex-direction: row;">
+            <div id="user-info" style="font-size: 50px"; >
+                <p>歡迎使用者 : {{ userdata.username }}</p>
             </div>
         </div>
-
-        <div class="book">
-            <img src="book2.jpg" alt="Book 2 Cover">
-            <div class="book-info">
-                <h3>Book 2 Title</h3>
-                <p>分類: Mystery</p>
-                <p>評分: 4.0</p>
+        <div id="recommenbook" style="font-size: 30px;">
+            推薦給您的好書
+        </div>
+        <div id="book-container" style="display: flex; flex-direction: row; align-items: center;">
+            <div class="book" style="margin-right: 20px; padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1474154022m/3.jpg" alt="Book 1 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 1 Title</h3>
+                    <p>分類: Fiction</p>
+                    <p>評分: 4.5</p>
+                </div>
+            </div>
+        
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
             </div>
         </div>
-
+    
+    
         <!-- 顯示更多書籍... -->
-
+    
         <div id="action-buttons">
-            <a href="{{ url_for('routes.borrow') }}" class="borrow">借書</a>
-            <a href="{{ url_for('routes.recommend') }}" class="return">還書</a>
-            <a href="{{ url_for('routes.index') }}" class="logout">登出</a>
+            <a href="{{ url_for('routes.borrow') }}" class="borrow" style="font-size: 30px;">借書</a>
+            <a href="{{ url_for('routes.recommend') }}" class="return" style="font-size: 30px;">還書</a>
+            <a href="{{ url_for('routes.index') }}" class="logout" style="font-size: 30px;">登出</a>
         </div>
-    </div>
+    </div>    
 </body>
 </html>
