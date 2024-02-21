@@ -3,7 +3,7 @@
 from flask import render_template,Response,Blueprint,redirect, url_for,request,jsonify
 from app.models import face_encoding
 from .services.login_service import LoginService
-
+import base64
 # 創建一個 Blueprint 實例
 #from app import db
 import asyncio
@@ -67,7 +67,7 @@ def haarcascade_frontalface_default():
 @bp.route('/utils.js')
 def utils():
     return render_template('utils.js')
-
+# --------------------------------------------------------------------------------------------------------
 @bp.route('/login', methods=['POST'])
 def login():
     # 從 POST 請求中獲取用戶名和密碼
@@ -83,17 +83,43 @@ def login():
         print(f'登入失敗 原因 {login_result}')
         return jsonify({'success': False, 'user': login_result}), 401
     
+# 存登入拍照圖片的函数
+@bp.route('/save_image', methods=['POST'])
+def save_image():
+    # 從 POST 請求獲取圖片資料的 base64 編碼字串
+    image_data_base64 = request.json.get('image')
+    # print('--------------------------------------------')
+    # print(image_data_base64)
+    image_data_base64 = image_data_base64.split(',')[-1]
+    # print('--------------------------------------------')
+    # print(image_data_base64)
+    try:
+        # 解碼 base64 編碼的圖像數據为 bytes
+        # 將圖像數據保存到文件
+        with open('D:\\smartlibrary\\smartlibrary_web\\database\\login_temp.png', 'wb') as f:
+            f.write(base64.b64decode(image_data_base64))
+        # 返回成功的 HTTP 狀態碼
+        return '', 200
+    except Exception as e:
+        print("Error occurred:", e)
+        import traceback
+        traceback.print_exc()
+        return str(e), 500
+    
 
 # 註冊的函式
-# def register():
-#     email = request.json.get('email')
-#     username = request.json.get('username')
-#     password = request.json.get('password')
-#     check, register_result = LoginService.user_register(email=email, password=password, username=username)
-#     if check:
-#         print(f'註冊成功 會員ID為 {register_result}')
-#     else:
-#         print(f'註冊失敗 原因 {register_result}')
+@bp.route('/registe', methods=['POST'])
+def registe():
+    email = request.json.get('email')
+    password = request.json.get('password')
+    booktype = request.json.get('booktype')
+    print(request.json)
+    return '',200
+    # check, register_result = LoginService.user_register(email=email, password=password, username=username)
+    # if check:
+    #     print(f'註冊成功 會員ID為 {register_result}')
+    # else:
+    #     print(f'註冊失敗 原因 {register_result}')
 
     # 在這裡進行登入驗證和相應的處理
 
