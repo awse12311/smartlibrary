@@ -96,7 +96,7 @@ def save_image():
     try:
         # 解碼 base64 編碼的圖像數據为 bytes
         # 將圖像數據保存到文件
-        with open('D:\\smartlibrary\\smartlibrary_web\\database\\login_temp.png', 'wb') as f:
+        with open('smartlibrary_web\database\login_temp.png', 'wb') as f:
             f.write(base64.b64decode(image_data_base64))
         # 返回成功的 HTTP 狀態碼
         return '', 200
@@ -113,9 +113,12 @@ def registe():
     email = request.json.get('email')
     password = request.json.get('password')
     booktype = request.json.get('booktype')
-    print(request.json)
-    return '',200
-    # check, register_result = LoginService.user_register(email=email, password=password, username=username)
+    username = request.json.get('username')
+    check, register_result = LoginService.user_register(email=email, password=password, username=username)
+    if check:
+        return '',200
+    else:
+        pass
     # if check:
     #     print(f'註冊成功 會員ID為 {register_result}')
     # else:
