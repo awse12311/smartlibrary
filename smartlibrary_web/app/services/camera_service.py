@@ -26,7 +26,11 @@ class CameraService:
                 user_id = name["user_id"]
                 print("載入資料: " + user_id)
                 self.database.append({"username":username, "user_id":user_id})
-                self.face_embeddings.append(np.load("smartlibrary_web\database\\"+ user_id + ".npy"))
+                try:
+                    self.face_embeddings.append(np.load("smartlibrary_web\database\\"+ user_id + ".npy"))
+                    print("成功")
+                except:
+                    print("沒找到資料")
         except Exception as e:
             raise e
 
@@ -57,8 +61,8 @@ class CameraService:
             # 將新list中最大位置的值拿出來
             most_similar_similarity = similarities[most_similar_index]
             print(similarities)
-            # 如果最大值小於0.98 則代表沒有匹配成功 回傳-1
-            if most_similar_similarity < 0.98: # 相似值超過98%則匹配成功
+            # 如果最大值小於0.97 則代表沒有匹配成功 回傳-1
+            if most_similar_similarity < 0.97: # 相似值超過98%則匹配成功
                 return -1, 0
             # 若匹配成功 回傳位置和值
             return most_similar_index, most_similar_similarity

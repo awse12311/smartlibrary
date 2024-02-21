@@ -4,7 +4,7 @@ import requests
 class FetchService:
     def __init__(self):
         # 網址有更新記得換
-        self.url = "https://6948-61-220-37-156.ngrok-free.app/"
+        self.url = "https://6411-61-220-37-156.ngrok-free.app/"
 
     def fetch_json_data(self):
             try:
@@ -70,6 +70,21 @@ class FetchService:
         except requests.exceptions.RequestException as e:
             print(e)  # 請求異常，印出錯誤訊息
             return False  # 返回 False，表示註冊失敗
+        
+    def save_user_interests_to_data(self, user_ins, user_id):
+        try:
+            user_interests = self.url + "/api/questionnaire_users_interests/"
+            for ins in user_ins:
+                data = {
+                "user_id": int(user_id),
+                "interests_id": int(ins)
+                }
+                response = requests.post(user_interests, json=data)
+                if response.status_code != 201:
+                    print("ERROR")
+        except requests.exceptions.RequestException as e:
+            print("Error fetching JSON data:", e)
+            return None
         
 if __name__ == "__main__":
     pass
