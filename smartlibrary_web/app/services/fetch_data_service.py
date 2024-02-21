@@ -100,6 +100,12 @@ class FetchService:
         
     def get_user_interest_by_id(self, user_id):
         interest = self.get_all_interest()
+        interest_list = []
+        for ins in interest:
+            if ins["user_id"] == user_id:
+                interest_list.append(ins["interests_id"])
+        return set(interest_list)
+                 
         
 if __name__ == "__main__":
     #FetchService().save_user_interests_to_data(user_id=1, user_ins=[1,2,3,4])
