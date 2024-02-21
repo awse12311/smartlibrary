@@ -24,7 +24,6 @@ class CameraService:
             for name in origin_data:
                 username = name["username"]
                 user_id = name["user_id"]
-                print("載入資料: " + user_id)
                 self.database.append({"username":username, "user_id":user_id})
                 try:
                     self.face_embeddings.append(np.load("smartlibrary_web\database\\"+ user_id + ".npy"))

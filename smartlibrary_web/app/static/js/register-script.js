@@ -106,7 +106,7 @@ function register() {
         "email": newEmail,
         "username": newUsername,
         "password": newPassword,
-        "bookTypes": bookTypes
+        "bookType": bookTypes
     };
 
     // 發送 POST 請求到後端
