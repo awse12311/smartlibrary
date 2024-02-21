@@ -25,12 +25,13 @@ def register():
     # 渲染名為 'register.html' 的模板並返回
     return render_template('register.html')
 
-@bp.route('/user')
-def user():
+@bp.route('/user/<userid>')
+def user(userid):
+    print('1111111',userid)
     global closed
     closed = True
     # 渲染名為 'user.html' 的模板並返回
-    return render_template('user.html')
+    return render_template('user.html',  userid=userid)
 
 @bp.route('/recommend')
 def recommend():
@@ -72,7 +73,7 @@ def utils():
 @bp.route('/login', methods=['POST'])
 def login():
     # 從 POST 請求中獲取用戶名和密碼
-    email = request.json.get('username') #把前面的user改成email
+    email = request.json.get('email') #把前面的user改成email
     password = request.json.get('password')
     check, login_result = LoginService.user_login_check(email=email, password=password)
     # 在這裡進行登入驗證和相應的處理
@@ -121,7 +122,7 @@ def registe():
     if check:
         return '',200
     else:
-        return ''
+        return '',501
     # if check:
     #     print(f'註冊成功 會員ID為 {register_result}')
     # else:
@@ -135,9 +136,9 @@ def registe():
 def check_face():
     result = CameraService().recogintion_face_for_image()
     if result == "no_face":
-        pass
+        return '',501
     elif result == "no_register":
-        pass
+        return '',200
     elif result == "over_face":
-        pass
+        return '',502
 

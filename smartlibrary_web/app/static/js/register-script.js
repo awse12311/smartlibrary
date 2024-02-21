@@ -58,6 +58,28 @@ function takePhoto() {
         .catch(error => {
             console.error('Error:', error);
         });
+        // ----------------------------------------------
+        fetch('/check_face', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Image saved successfully');
+            } else if (response.status === 501) {
+                console.error('No face detected in the image');
+            } else if (response.status === 501) {
+                console.error('No face detected in the image');
+            } else if (response.status === 501) {
+                console.error('No face detected in the image');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
     } else {
         console.error('Video metadata not loaded yet');
     }

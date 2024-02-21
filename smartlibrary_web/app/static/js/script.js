@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function login() {
     // 取得帳號和密碼
-    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
     // 使用 fetch 發送 POST 請求到後端
@@ -80,23 +80,29 @@ function login() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username: username, password: password })
+        body: JSON.stringify({ email: email, password: password })
     })
     .then(response => {
         if (response.ok) {
             // 登入成功，可以執行相應的操作
             console.log('Login successful');
-            window.location.href = '/user';
+            return response.json(); // 返回一個 Promise 對象，解析為 JSON 格式的數據
         } else {
             // 登入失敗，處理錯誤
             console.error('Login failed');
-            return response.json(); // 返回一個 Promise 對象，解析為 JSON 格式的數據
+            alert('登入失敗，請確認帳號密碼是否正確')
+            throw new Error('登入失敗');
         }
     })
     .then(data => {
         // 在這裡處理從後端返回的 JSON 數據
-        if (data) {
-            alert('登入失敗: ' + data.user); // 在這裡添加 alert，包含 login_result
+        if (data.success) {
+            console.log(data.user.username)
+            alert('登入成功，歡迎 ' + data.user.user_id); // 在這裡添加 alert，包含成功登入的用戶名
+            // localStorage.setItem('userData', JSON.stringify(data));
+            window.location.href = '/user/' +  data.user.user_id; // 如果有需要，可以重定向到用戶首頁或其他頁面
+        } else {
+            alert('登入失敗: ' + data.user); // 在這裡添加 alert，包含登入失敗的原因
         }
     })
     .catch(error => {

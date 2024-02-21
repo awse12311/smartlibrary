@@ -4,7 +4,7 @@ import requests
 class FetchService:
     def __init__(self):
         # 網址有更新記得換
-        self.url = "https://6411-61-220-37-156.ngrok-free.app/"
+        self.url = "https://a390-2001-b400-e23b-df08-3cf6-561d-9517-2409.ngrok-free.app"
 
     def fetch_json_data(self):
             try:
