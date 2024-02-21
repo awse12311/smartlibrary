@@ -33,27 +33,44 @@ function takePhoto() {
 
 function register() {
     // 獲取註冊信息
+    var newEmail = document.getElementById('new-email').value;
     var newUsername = document.getElementById('new-username').value;
     var newPassword = document.getElementById('new-password').value;
 
     // 檢查表單是否填寫完整
-    if (!newUsername || !newPassword) {
-        alert('請填寫所有必填字段！');
+    if (!newEmail || !newUsername || !newPassword) {
+        alert('請填寫所有欄位！');
+        return;
+    }
+
+    // 驗證電子郵件地址的格式
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(newEmail)) {
+        alert('請填寫正確的電子郵件地址！');
         return;
     }
 
     // 獲取勾選的書籍類型
     var bookTypes = [];
     var checkboxes = document.getElementsByName('book-type');
+    var atLeastOneChecked = false; // 添加變量來檢查是否至少有一個書籍類型被勾選
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
+            atLeastOneChecked = true; // 如果有勾選的書籍類型，則將變量設置為 true
             bookTypes.push(checkbox.value);
         }
     });
 
+    // 檢查是否至少有一項書籍類型被勾選
+    if (!atLeastOneChecked) {
+        alert('請至少選擇一項書籍類型！');
+        return;
+    }
+
     // 構造要發送到後端的 JSON 數據
     var data = {
-        "email": newUsername,
+        "email": newEmail,
+        "username": newUsername,
         "password": newPassword,
         "bookTypes": bookTypes
     };

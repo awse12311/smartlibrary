@@ -34,7 +34,7 @@ header {
     border: 1px solid #ccc; /* 边框样式 */
     padding: 20px; /* 内边距 */
     background: rgba(255, 255, 255, 0.8); /* 背景透明度设置为 0.8 */
-    font-size: 30px; /* 調整容器中文字的大小 */
+    font-size: 20px; /* 調整容器中文字的大小 */
     text-align: center; /* 文字居中 */
 }
 
