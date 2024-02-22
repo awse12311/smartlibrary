@@ -9,7 +9,7 @@ class RecommendService:
         # 根據使用者的喜好將書本過濾並依評分排序
         recommend_books = []
         for ins in user_ins:
-            book_list = [[book['title'], book['label'], book['average_rating']] for book in self.book_data if book['label'] == ins]
+            book_list = [[book['title'], book['label'], book['average_rating']] for book in self.book_data if book['label'] == int(ins)]
             recommend_books.append(sorted(book_list, key=lambda x: x[2], reverse=True))
         recommend_number = 15
 
