@@ -27,12 +27,17 @@ def register():
     # 渲染名為 'register.html' 的模板並返回
     return render_template('register.html')
 
-@bp.route('/user/<userid>')
+@bp.route('/user/<userid>/')
 def user(userid):
     userdata = FetchService().get_user_by_id(user_id=int(userid))
     print(userdata)
+    # 利用回傳的ID獲得使用者的喜好清單
+    user_ins = FetchService().get_user_interest_by_id(user_id=int(userid))
+    # 利用喜好清單獲得推薦書籍的列表
+    recommend_list = RecommendService().recommend_books_for_user(user_ins=user_ins)
+    print(recommend_list)
     # 渲染名為 'user.html' 的模板並返回
-    return render_template('user.html',  userid=userid ,userdata=userdata)
+    return render_template('user.html',  userid=userid , userdata=userdata, recommend_list=recommend_list)
 
 @bp.route('/recommend')
 def recommend():
@@ -71,21 +76,7 @@ def haarcascade_frontalface_default():
 def utils():
     return render_template('utils.js')
 # --------------------------------------------------------------------------------------------------------
-@bp.route('/login', methods=['POST'])
-def login():
-    # 從 POST 請求中獲取用戶名和密碼
-    email = request.json.get('email') #把前面的user改成email
-    password = request.json.get('password')
-    check, login_result = LoginService.user_login_check(email=email, password=password)
-    print(login_result)
-    # 在這裡進行登入驗證和相應的處理
-    # 在後端終端中列印用戶名和密碼並回傳http回應的狀態碼
-    if check:
-        print(f'登入成功 歡迎 {login_result["username"]}')
-        return jsonify({'success': True, 'user': login_result}), 200
-    else:
-        print(f'登入失敗 原因 {login_result}')
-        return jsonify({'success': False, 'user': login_result}), 401
+
     
 # 存登入拍照圖片的函数
 @bp.route('/save_image', methods=['POST'])
@@ -152,13 +143,24 @@ def check_face():
 def login_face():
     # 使用暫存檔的圖片做人臉識別登入
     check, result = LoginService().user_login_with_face()
-    recommend_list = None
     if check:
-        # 利用回傳的ID獲得使用者的喜好清單
-        user_ins = FetchService().get_user_interest_by_id(user_id=result)
-        # 利用喜好清單獲得推薦書籍的列表
-        recommend_list = RecommendService().recommend_books_for_user(user_ins=user_ins)
-        # 回傳登入結果(True/False), 使用者ID, 推薦書籍列表
-        print(recommend_list)
-        return jsonify({'success': True, 'user': result, "recommend_book": recommend_list}),200
-    return jsonify({'success': False, 'user': result, "recommend_book": recommend_list}),401
+        # 回傳登入結果(True/False), 使用者ID
+        return jsonify({'success': True, 'user': result}),200
+    return jsonify({'success': False, 'user': result}),401
+
+@bp.route('/login', methods=['POST'])
+def login():
+    # 從 POST 請求中獲取用戶名和密碼
+    email = request.json.get('email') #把前面的user改成email
+    password = request.json.get('password')
+    check, login_result = LoginService.user_login_check(email=email, password=password)
+
+    # 在這裡進行登入驗證和相應的處理
+    # 在後端終端中列印用戶名和密碼並回傳http回應的狀態碼
+    if check:
+        print(f'登入成功 歡迎 {login_result["username"]}')
+        
+        return jsonify({'success': True, 'user': login_result}), 200
+    else:
+        print(f'登入失敗 原因 {login_result}')
+        return jsonify({'success': False, 'user': login_result}), 401

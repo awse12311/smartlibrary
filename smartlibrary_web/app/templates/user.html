@@ -21,16 +21,27 @@
         <div id="recommenbook" style="font-size: 30px;">
             推薦給您的好書
         </div>
-        <div id="book-container" style="display: flex; flex-direction: row; align-items: center;">
+        <div id="book-container">
+            {% for book in recommend_list %}
             <div class="book" style="margin-right: 20px; padding: 10px;">
-                <img src="https://images.gr-assets.com/books/1474154022m/3.jpg" alt="Book 1 Cover" style="margin-bottom: 10px;">
+                <img src="{{ book[3] }}" alt="Book Cover" style="margin-bottom: 10px;">
                 <div class="book-info">
-                    <h3>Book 1 Title</h3>
-                    <p>分類: Fiction</p>
-                    <p>評分: 4.5</p>
+                    <h4>書名:</h4>
+                    <h4>{{book[0]}}</h4>
+                    <p>分類: {{book[1]}}</p>
+                    <p>評分:{{book[2]}}</p>
                 </div>
             </div>
-        
+            {% endfor %}
+            <!-- <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
             <div class="book" style="padding: 10px;">
                 <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
                 <div class="book-info">
@@ -39,6 +50,114 @@
                     <p>評分: 4.0</p>
                 </div>
             </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div>
+
+            <div class="book" style="padding: 10px;">
+                <img src="https://images.gr-assets.com/books/1361039443m/41865.jpg" alt="Book 2 Cover" style="margin-bottom: 10px;">
+                <div class="book-info">
+                    <h3>Book 2 Title</h3>
+                    <p>分類: Mystery</p>
+                    <p>評分: 4.0</p>
+                </div>
+            </div> -->
         </div>
     
     

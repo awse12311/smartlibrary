@@ -24,7 +24,7 @@ class RecommendService:
         # 根據使用者的喜好將書本過濾並依評分排序
         recommend_books = []
         for ins in user_ins:
-            book_list = [[book['title'], interest_dict[int(book['label'])], book['average_rating']] for book in self.book_data if book['label'] == int(ins)]
+            book_list = [[book['title'], interest_dict[int(book['label'])], book['average_rating'], book['image_url']] for book in self.book_data if book['label'] == int(ins)]
             recommend_books.append(sorted(book_list, key=lambda x: x[2], reverse=True))
             # print("興趣 "+ str(ins))
             # print(len(book_list))

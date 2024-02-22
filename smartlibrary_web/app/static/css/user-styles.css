@@ -41,10 +41,16 @@ body {
 #book-container {
     background: rgba(139, 139, 139, 0.637);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 350px;
+    overflow-y: auto; /* 添加垂直滾動條 */
+    display: flex;
+    flex-wrap: wrap; /* 達到一行3本書的效果 */
+    justify-content: space-between; /* 左右間距均分 */
 }
 
 /* 書籍樣式 */
 .book {
+    flex-basis: calc(33.33% - 20px); /* 一行3本書，考慮間距，每本書佔比約為33.33% */
     display: flex;
     align-items: center; /* 在主軸上居中對齊 */
     width: 100%; /* 使用相同的寬度 */
