@@ -80,7 +80,7 @@ function takePhoto() {
                 alert('無法使用這張照片：人臉辨識失敗');
             } else {
                 console.error('Unknown error');
-                alert('無法使用這張照片：未知錯誤');
+                alert('無法使用這張照片：這張臉已經註冊過了');
             }
         })
         .catch(error => {

@@ -13,6 +13,7 @@ class CameraService:
         self.face_rec_model = face_recognition.api.face_encodings
         self.face_embeddings = []
         self.database = []
+        self.user_id_list = []
         self.frame = cv2.imread(self.login_temp_png)
 
     # embeddings更新資料
@@ -20,6 +21,7 @@ class CameraService:
         try:
             origin_data = FetchService().get_all_users()
             self.database = []
+            self.user_id_list = []
             self.face_embeddings = []
             for name in origin_data:
                 username = name["username"]
@@ -29,6 +31,7 @@ class CameraService:
                     data = np.load("smartlibrary_web\database\\"+ str(user_id) + ".npy")
                     print(data)
                     self.face_embeddings.append(data)
+                    self.user_id_list.append(user_id)
                     print("成功")
                 except:
                     print("沒找到資料")
@@ -62,12 +65,13 @@ class CameraService:
             most_similar_index = np.argmax(similarities)
             # 將新list中最大位置的值拿出來
             most_similar_similarity = similarities[most_similar_index]
+            most_similar_id = self.user_id_list[most_similar_index]
             print(similarities)
             # 如果最大值小於0.97 則代表沒有匹配成功 回傳-1
             if most_similar_similarity < 0.97: # 相似值超過98%則匹配成功
                 return -1, 0
-            # 若匹配成功 回傳位置和值
-            return most_similar_index, most_similar_similarity
+            # 若匹配成功 回傳ID和值
+            return most_similar_id, most_similar_similarity
         except Exception as e:
             raise e
 
@@ -126,7 +130,8 @@ class CameraService:
                     if id == -1:
                         user_id = -1
                     else:
-                        user_id = self.database[id]["user_id"]
+                        user_id = id
+                    print(user_id)
             if face_num == 0: # 沒有找到臉
                 return "no_face"
             elif face_num > 1: # 超過一個臉
@@ -158,7 +163,7 @@ class CameraService:
     
     def save_temp_to_data(self, user_id:str):
         # 讀取暫存檔的npy和jpg 並以ID命名後存到資料內.
-        temp_npy = np.load("smartlibrary_web\database\login_temp.npy")
+        temp_npy = np.load("smartlibrary_web\database\login_temp.npy",allow_pickle=True)
         cv2.imwrite(f"smartlibrary_web\database\{user_id}.png", self.frame)
         np.save(f"smartlibrary_web\database\{user_id}.npy", temp_npy)
 

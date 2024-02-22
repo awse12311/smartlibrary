@@ -159,5 +159,6 @@ def login_face():
         # 利用喜好清單獲得推薦書籍的列表
         recommend_list = RecommendService().recommend_books_for_user(user_ins=user_ins)
         # 回傳登入結果(True/False), 使用者ID, 推薦書籍列表
+        print(recommend_list)
         return jsonify({'success': True, 'user': result, "recommend_book": recommend_list}),200
     return jsonify({'success': False, 'user': result, "recommend_book": recommend_list}),401
