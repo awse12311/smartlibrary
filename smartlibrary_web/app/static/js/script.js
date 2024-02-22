@@ -143,9 +143,45 @@ function face_login() {
         .catch(error => {
             console.error('Error:', error);
         });
+
+        fetch('/login_face', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                // 登入成功，可以執行相應的操作
+                console.log('Login successful');
+                return response.json(); // 返回一個 Promise 對象，解析為 JSON 格式的數據
+            } else {
+                // 登入失敗，處理錯誤
+                console.error('Login failed');
+                alert('登入失敗，請再試一次或使用帳號密碼登入')
+                throw new Error('登入失敗');
+            }
+        })
+
+        .then(data => {
+            // 在這裡處理從後端返回的 JSON 數據
+            if (data.success) {
+                console.log(data.user)
+                alert('登入成功，歡迎' + data.user); // 在這裡添加 alert，包含成功登入的用戶名
+                window.location.href = '/user/' +  data.user; // 如果有需要，可以重定向到用戶首頁或其他頁面
+            } else {
+                alert('登入失敗，請再試一次或使用帳號密碼登入 '); // 在這裡添加 alert，包含登入失敗的原因
+            }
+        })
+
+        .catch(error => {
+            console.error('Error:', error);
+        });
     } else {
         console.error('Video metadata not loaded yet');
     }
+
+    
 }
 
 document.addEventListener('DOMContentLoaded', function() {

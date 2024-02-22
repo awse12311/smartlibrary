@@ -58,10 +58,29 @@ function takePhoto() {
         .catch(error => {
             console.error('Error:', error);
         });
+
+        fetch('/check_face', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Image can be used');
+                alert('可以使用這張照片，請繼續進行註冊')
+            } else {
+                console.error('Failed to save image');
+                alert('無法使用這張照片',result)
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     } else {
         console.error('Video metadata not loaded yet');
     }
-    
+    fetch
 }
 
 
@@ -124,11 +143,14 @@ function register() {
             window.location.href = '/'; // 註冊成功後重定向到登錄頁面
         } else {
             console.error('Failed');
+            response.text().then(errorMessage => {
+                alert('註冊失敗: ' + errorMessage); // 在這裡顯示失敗原因
+            });
         }
     })
     .catch(error => {
         // 處理錯誤
         console.error('註冊失敗:', error);
-        alert('註冊失敗，請稍後重試。');
+        alert('註冊失敗');
     });
 }
