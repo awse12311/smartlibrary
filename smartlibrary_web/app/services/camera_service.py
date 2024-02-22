@@ -26,7 +26,9 @@ class CameraService:
                 user_id = name["user_id"]
                 self.database.append({"username":username, "user_id":user_id})
                 try:
-                    self.face_embeddings.append(np.load("smartlibrary_web\database\\"+ user_id + ".npy"))
+                    data = np.load("smartlibrary_web\database\\"+ str(user_id) + ".npy")
+                    print(data)
+                    self.face_embeddings.append(data)
                     print("成功")
                 except:
                     print("沒找到資料")
@@ -86,7 +88,8 @@ class CameraService:
     def recogintion_face_for_image(self):
         self.update_embeddings()
         try:
-            frame = self.frame
+            frame = cv2.imread(self.login_temp_png)
+            print(frame)
             # 將幀轉換為 RGB 格式（face_recognition 使用 RGB）
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
