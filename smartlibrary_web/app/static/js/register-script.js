@@ -70,8 +70,8 @@ function takePhoto() {
                 console.log('Image can be used');
                 alert('可以使用這張照片，請繼續進行註冊')
             } else {
-                console.error('Failed to save image');
-                alert('無法使用這張照片',result)
+                console.error('Image cant be used');
+                alert('無法使用這張照片')
             }
         })
         .catch(error => {

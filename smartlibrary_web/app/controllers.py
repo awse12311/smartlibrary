@@ -140,11 +140,13 @@ def registe():
 def check_face():
     result = CameraService().recogintion_face_for_image()
     if result == "no_face":
-        pass
+        return result,401
     elif result == "no_register":
-        pass
+        return result,200
     elif result == "over_face":
-        pass
+        return result,402
+    else:
+        return result,403
 
 @bp.route('/login_face', methods=['POST'])
 def login_face():
