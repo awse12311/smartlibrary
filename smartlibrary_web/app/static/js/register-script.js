@@ -68,10 +68,19 @@ function takePhoto() {
         .then(response => {
             if (response.ok) {
                 console.log('Image can be used');
-                alert('可以使用這張照片，請繼續進行註冊')
+                alert('可以使用這張照片，請繼續進行註冊');
+            } else if (response.status === 401) {
+                console.error('No face detected');
+                alert('無法使用這張照片：未檢測到人臉');
+            } else if (response.status === 402) {
+                console.error('Too many faces');
+                alert('無法使用這張照片：檢測到多個人臉');
+            } else if (response.status === 403) {
+                console.error('Face recognition failed');
+                alert('無法使用這張照片：人臉辨識失敗');
             } else {
-                console.error('Image cant be used');
-                alert('無法使用這張照片')
+                console.error('Unknown error');
+                alert('無法使用這張照片：未知錯誤');
             }
         })
         .catch(error => {

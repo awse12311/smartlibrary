@@ -54,6 +54,7 @@ class CameraService:
     # 從一組臉部embedding中找到最相似的臉
     def find_most_similar(self, target_embedding):
         try:
+            print("找到最相似的臉")
             # 求餘弦相似度
             # 照順序對self.face_embeddings的list中所有資料做cosine_similarity 並存成一個新的list
             similarities = [self.cosine_similarity(target_embedding, embedding) for embedding in self.face_embeddings]
@@ -88,8 +89,8 @@ class CameraService:
     def recogintion_face_for_image(self):
         self.update_embeddings()
         try:
+            print("開始比對")
             frame = cv2.imread(self.login_temp_png)
-            print(frame)
             # 將幀轉換為 RGB 格式（face_recognition 使用 RGB）
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
