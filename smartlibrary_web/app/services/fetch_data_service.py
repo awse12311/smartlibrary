@@ -4,7 +4,7 @@ import requests
 class FetchService:
     def __init__(self):
         # 網址有更新記得換
-        self.url = "https://b962-1-171-169-219.ngrok-free.app/"
+        self.url = "https://a102-61-220-37-156.ngrok-free.app/"
 
     def fetch_json_data(self):
             try:
@@ -97,14 +97,14 @@ class FetchService:
         except requests.exceptions.RequestException as e:
             print("Error fetching JSON data:", e)
             return None
-        
+
     def get_user_interest_by_id(self, user_id):
         interest = self.get_all_interest()
         interest_list = []
         for ins in interest:
-            if ins["user_id"] == user_id:
+            if ins["user_id"] == int(user_id):
                 interest_list.append(ins["interests_id"])
-        return set(interest_list)
+        return list(set(interest_list))
                  
         
 if __name__ == "__main__":

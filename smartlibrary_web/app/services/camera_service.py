@@ -116,7 +116,6 @@ class CameraService:
 
                 # 若找到臉 則和資料庫中的配對
                 if face_embedding is not None:
-                    self.update_embeddings()
                     target = face_embedding
                     # score為最高相似度
                     id, score = self.find_most_similar(target)

@@ -145,3 +145,16 @@ def check_face():
     elif result == "over_face":
         pass
 
+# @bp.route('/login_face', methods=['POST'])
+# def check_face():
+#     # 使用暫存檔的圖片做人臉識別登入
+#     check, result = LoginService().user_login_with_face()
+#     recommend_list = None
+#     if check:
+#         # 利用回傳的ID獲得使用者的喜好清單
+#         user_ins = FetchService().get_user_interest_by_id(user_id=result)
+#         # 利用喜好清單獲得推薦書籍的列表
+#         recommend_list = RecommendService().recommend_books_for_user(user_ins=user_ins)
+#         # 回傳登入結果(True/False), 使用者ID, 推薦書籍列表
+#     return jsonify({'success': check, 'user': result, "recommend_book": recommend_list})
+

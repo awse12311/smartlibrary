@@ -27,14 +27,25 @@ class LoginService:
             "password": password,
             "email": email
             }
+            # 使用POST進行註冊
             check, result = FetchService().user_register_data(data=data)
             if check:
+                # 儲存暫存檔到資料庫並命名為ID
                 CameraService().save_temp_to_data(user_id=result)
+                # 儲存使用者的喜好到資料庫
                 FetchService().save_user_interests_to_data(user_ins=booktype, user_id=result)
             return check, result
         except Exception as e:
             raise e
-        
+
+    @staticmethod
+    def user_login_with_face():
+        result = CameraService().recogintion_face_for_image()
+        if result not in ["no_face", "over_face", "no_register"]:
+            return True, result
+        else:
+            return False, result
+
 if __name__ == "__main__":
     # result = LoginService.user_register(username="7441444", email="7441444", password="7441444")
     # print(result)
