@@ -66,7 +66,7 @@ class FetchService:
                 user_id = [user["user_id"] for user in user_list if user["email"] == data["email"]]
                 return True, user_id[0]  # 如果註冊成功，返回 使用者ID
             else:
-                return False, "email duplicate"  # 如果註冊失敗，返回 False
+                return False, "該信箱已被註冊"  # 如果註冊失敗，返回 False
         except requests.exceptions.RequestException as e:
             print(e)  # 請求異常，印出錯誤訊息
             return False  # 返回 False，表示註冊失敗
