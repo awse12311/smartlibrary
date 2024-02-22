@@ -11,6 +11,8 @@ class RecommendService:
         for ins in user_ins:
             book_list = [[book['title'], book['label'], book['average_rating']] for book in self.book_data if book['label'] == int(ins)]
             recommend_books.append(sorted(book_list, key=lambda x: x[2], reverse=True))
+            # print("興趣 "+ str(ins))
+            # print(len(book_list))
         recommend_number = 15
 
         # 計算應該拿書本的輪次和額外挑選的
@@ -32,5 +34,5 @@ class RecommendService:
         return result
         
 if __name__ == "__main__":
-    recom = RecommendService().recommend_books_for_user(user_ins=[5, 7, 8, 9])
+    recom = RecommendService().recommend_books_for_user(user_ins=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
     print(recom)
