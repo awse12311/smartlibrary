@@ -98,7 +98,7 @@ function login() {
         // 在這裡處理從後端返回的 JSON 數據
         if (data.success) {
             console.log(data.user)
-            alert('登入成功，請等待頁面跳轉'); // 在這裡添加 alert，包含成功登入的用戶名
+            alert('登入成功，請等待頁面跳轉，正在搜尋推薦書籍'); // 在這裡添加 alert，包含成功登入的用戶名
             window.location.href = '/user/' +  data.user.user_id; // 如果有需要，可以重定向到用戶首頁或其他頁面
         } else {
             alert('登入失敗: ' + data.user); // 在這裡添加 alert，包含登入失敗的原因
@@ -168,7 +168,7 @@ function face_login() {
             if (data.success) {
                 console.log(data.user)
                 console.log(data.recommend_book)
-                alert('登入成功，請等待頁面跳轉'); // 在這裡添加 alert，包含成功登入的用戶名
+                alert('登入成功，請等待頁面跳轉，正在搜尋推薦書籍'); // 在這裡添加 alert，包含成功登入的用戶名
                 window.location.href = '/user/' +  data.user; // 如果有需要，可以重定向到用戶首頁或其他頁面
             } else {
                 alert('登入失敗，請再試一次或使用帳號密碼登入 '); // 在這裡添加 alert，包含登入失敗的原因
