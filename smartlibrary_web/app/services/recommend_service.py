@@ -6,10 +6,25 @@ class RecommendService:
         self.book_data = FetchService().get_all_books()
 
     def recommend_books_for_user(self, user_ins): #用list列出使用者的所有興趣項目
+        # 對照字典
+        interest_dict = {
+            1:"藝術文學",
+            2:"傳記與回憶錄",
+            3:"教育與參考資料",
+            4:"健康生活",
+            5:"文學",
+            6:"歷史文化",
+            7:"小說",
+            8:"宗教哲學",
+            9:"科學自然",
+            10:"社會科學",
+            11:"旅遊地理"
+        }
+        
         # 根據使用者的喜好將書本過濾並依評分排序
         recommend_books = []
         for ins in user_ins:
-            book_list = [[book['title'], book['label'], book['average_rating']] for book in self.book_data if book['label'] == int(ins)]
+            book_list = [[book['title'], interest_dict[int(book['label'])], book['average_rating']] for book in self.book_data if book['label'] == int(ins)]
             recommend_books.append(sorted(book_list, key=lambda x: x[2], reverse=True))
             # print("興趣 "+ str(ins))
             # print(len(book_list))
@@ -34,5 +49,5 @@ class RecommendService:
         return result
         
 if __name__ == "__main__":
-    recom = RecommendService().recommend_books_for_user(user_ins=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+    recom = RecommendService().recommend_books_for_user(user_ins=[5, 3, 7])
     print(recom)

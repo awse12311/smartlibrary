@@ -16,7 +16,7 @@ data_list = json.loads(json_data)
 
 # 發送POST請求將JSON數據發送到API端點
 
-for data in data_list[2795:]:
+for data in data_list[3117:]:
     time.sleep(0.5)
     response = requests.post(api_url, json=data)
     # 檢查請求是否成功
